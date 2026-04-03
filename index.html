@@ -950,6 +950,21 @@ document.addEventListener('DOMContentLoaded',function(){
     });
   },{threshold:0.1});
   document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el);});
+
+  // Autoplay vídeo "Conheça o Canal" ao entrar na viewport
+  var canalVideo = document.getElementById('canal-video');
+  if(canalVideo){
+    var videoObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          canalVideo.play();
+        } else {
+          canalVideo.pause();
+        }
+      });
+    },{threshold:0.5});
+    videoObs.observe(canalVideo);
+  }
 });
 </script>
 </head>
@@ -1019,7 +1034,7 @@ document.addEventListener('DOMContentLoaded',function(){
       </p>
     </div>
     <div class="video-embed fade-in" style="transition-delay: 0.15s;">
-      <video controls style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:16px;" poster="">
+      <video id="canal-video" controls muted style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:16px;" poster="">
         <source src="assets/videos/conheca_canal.mp4" type="video/mp4">
       </video>
     </div>
