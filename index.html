@@ -1035,36 +1035,44 @@ document.addEventListener('DOMContentLoaded',function(){
   </p>
 
   <div class="creator-main fade-in">
-    <div class="creator-avatar-lg">
-      <img src="assets/images/rodrigo.jpg" alt="Rodrigo Vianna" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-      <div class="avatar-placeholder" style="display:none;"><div class="avatar-initials">RV</div></div>
-    </div>
-    <div class="creator-name">Rodrigo Vianna</div>
+    <a href="https://www.linkedin.com/in/rviannaoliveira/" target="_blank" style="text-decoration:none;">
+      <div class="creator-avatar-lg">
+        <img src="assets/images/rodrigo.jpg" alt="Rodrigo Vianna" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="avatar-placeholder" style="display:none;"><div class="avatar-initials">RV</div></div>
+      </div>
+    </a>
+    <div class="creator-name">Rodrigo Vianna <span style="color:var(--muted);font-weight:400;font-size:1rem;">(Rods)</span></div>
     <div class="creator-role">Fundador · Engenheiro Mobile</div>
   </div>
 
   <div class="creators-grid">
     <div class="creator-card fade-in" style="transition-delay: 0.1s;">
-      <div class="creator-avatar-sm">
-        <img src="assets/images/junior.jpg" alt="Junior Martins" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="avatar-placeholder" style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">JM</div>
-      </div>
+      <a href="https://www.linkedin.com/in/jrmartins/" target="_blank" style="text-decoration:none;">
+        <div class="creator-avatar-sm">
+          <img src="assets/images/junior.jpg" alt="Junior Martins" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="avatar-placeholder" style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">JM</div>
+        </div>
+      </a>
       <div class="creator-card-name">Junior Martins</div>
       <div class="creator-card-role">Engenheiro Mobile</div>
     </div>
     <div class="creator-card fade-in" style="transition-delay: 0.2s;">
-      <div class="creator-avatar-sm">
-        <img src="assets/images/moro.jpg" alt="Gabriel Moro" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="avatar-placeholder" style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">GM</div>
-      </div>
+      <a href="https://www.linkedin.com/in/gabrielbronzattimoro15031994/" target="_blank" style="text-decoration:none;">
+        <div class="creator-avatar-sm">
+          <img src="assets/images/moro.jpg" alt="Gabriel Moro" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="avatar-placeholder" style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">GM</div>
+        </div>
+      </a>
       <div class="creator-card-name">Gabriel Moro</div>
       <div class="creator-card-role">Engenheiro Mobile</div>
     </div>
     <div class="creator-card fade-in" style="transition-delay: 0.3s;">
-      <div class="creator-avatar-sm">
-        <img src="assets/images/pedro.jpg" alt="Pedro Alvarez" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="avatar-placeholder" style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">PA</div>
-      </div>
+      <a href="https://www.linkedin.com/in/pedro-alvarez94/" target="_blank" style="text-decoration:none;">
+        <div class="creator-avatar-sm">
+          <img src="assets/images/pedro.jpg" alt="Pedro Alvarez" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="avatar-placeholder" style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">PA</div>
+        </div>
+      </a>
       <div class="creator-card-name">Pedro Alvarez</div>
       <div class="creator-card-role">Engenheiro Mobile</div>
     </div>
@@ -1244,7 +1252,8 @@ document.addEventListener('DOMContentLoaded',function(){
       <div class="iniciativa-info">
         <span class="iniciativa-tag">Artigos</span>
         <div class="iniciativa-name">Medium</div>
-        <div class="iniciativa-desc">Textos técnicos, opiniões e análises aprofundadas sobre o mundo dev.</div>
+        <div class="iniciativa-desc" style="margin-bottom:14px;">Textos técnicos, opiniões e análises aprofundadas sobre o mundo dev.</div>
+        <a href="https://medium.com/codandotv/all" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#fff;color:#000;font-size:0.72rem;font-weight:700;padding:6px 14px;border-radius:6px;text-decoration:none;white-space:nowrap;">Ler no Medium</a>
       </div>
       <div class="iniciativa-media">
         <img src="assets/images/artigos.png" alt="Artigos" onerror="this.style.display='none'">
@@ -1272,7 +1281,7 @@ document.addEventListener('DOMContentLoaded',function(){
         <div class="iniciativa-desc" style="font-size: 0.78rem; border-left: 2px solid var(--accent); padding-left: 12px; margin-bottom: 16px;">
           Este curso tem como foco principal o ecossistema KMP. Não é um curso introdutório de Kotlin como linguagem, nem aprofunda arquitetura moderna ou Android nativo. A proposta é ajudar desenvolvedores a entenderem como compartilhar código entre Android e iOS de forma prática e direta.
         </div>
-        <span style="display:inline-flex;align-items:center;gap:6px;background:var(--primary);color:#fff;font-size:0.78rem;font-weight:700;padding:8px 18px;border-radius:8px;cursor:pointer;">🎓 Quero conhecer o curso</span>
+        <a href="https://www.udemy.com/course/kotlin-multiplatform-domine-do-basico-ao-intermediario/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--primary);color:#fff;font-size:0.78rem;font-weight:700;padding:8px 18px;border-radius:8px;text-decoration:none;">🎓 Quero conhecer o curso</a>
       </div>
       <div class="iniciativa-media" style="display:flex;">
         <iframe style="width:100%;height:100%;border:none;border-radius:0 14px 14px 0;" src="https://www.youtube.com/embed/2_dYJr1s5Ak" title="Curso KMP" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
