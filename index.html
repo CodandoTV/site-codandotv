@@ -1,1338 +1,480 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Codando&lt;TV/&gt;</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Sora:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@800&family=Outfit:wght@900&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codando&lt;TV/&gt;</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Sora:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@800&family=Outfit:wght@900&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/app.js"></script>
 
-  :root {
-    --bg: #080B10;
-    --surface: #0F1318;
-    --card: #141920;
-    --border: rgba(255,255,255,0.07);
-    --accent: #38b6ff;
-    --accent2: #8c52ff;
-    --primary: #6e35d1;
-    --primary-dark: #4c17b9;
-    --odd: #38b6ff;
-    --even: #6e35d1;
-    --text: #F0F2F5;
-    --muted: #8A909C;
-    --font-display: 'Sora', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-display);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  .page-container {
-    max-width: 1280px;
-    margin: 0 auto;
-    width: 100%;
-  }
-
-
-
-  .hero-video {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    opacity: 0.35;
-    z-index: 0;
-  }
-
-  .hero-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to bottom, rgba(8,11,16,0.4) 0%, rgba(8,11,16,0.85) 100%);
-    z-index: 1;
-  }
-
-  #home > *:not(.hero-video):not(.hero-overlay):not(.hero-grid):not(.hero-glow) {
-    position: relative;
-    z-index: 2;
-  }
-
-  .hero-grid { z-index: 0; }
-  .hero-glow { z-index: 0; }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 max(5%, calc((100% - 1280px) / 2));
-    height: 64px;
-    background: rgba(8,11,16,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-logo {
-    font-family: var(--font-mono);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--text);
-    text-decoration: none;
-    display: flex; align-items: center; gap: 8px;
-  }
-
-  .nav-logo span { color: var(--accent); }
-
-  .nav-links {
-    display: flex; gap: 32px; list-style: none;
-  }
-
-  .nav-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.88rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--text); }
-
-  /* HERO */
-  #home {
-    min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    text-align: center;
-    padding: 120px 5% 80px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(110,53,209,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(110,53,209,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-  }
-
-  .hero-glow {
-    position: absolute;
-    width: 600px; height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(110,53,209,0.18) 0%, transparent 70%);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--accent);
-    border: 1px solid rgba(56,182,255,0.3);
-    padding: 6px 16px;
-    border-radius: 100px;
-    margin-bottom: 28px;
-    letter-spacing: 0.06em;
-  }
-
-  .hero-badge::before {
-    content: '';
-    width: 7px; height: 7px;
-    background: var(--accent);
-    border-radius: 50%;
-    display: inline-block;
-  }
-
-  h1.hero-title {
-    font-size: clamp(3rem, 8vw, 6rem);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    margin-bottom: 24px;
-    position: relative;
-  }
-
-  h1.hero-title span { color: var(--accent); }
-
-  .hero-sub {
-    font-size: 1.1rem;
-    color: var(--muted);
-    max-width: 560px;
-    margin: 0 auto 40px;
-    font-weight: 400;
-  }
-
-  .hero-socials {
-    display: flex; gap: 16px; justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-  }
-
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s;
-    cursor: pointer;
-    border: none;
-    font-family: var(--font-display);
-  }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
-
-  .btn-outline:hover {
-    border-color: rgba(255,255,255,0.25);
-    background: rgba(255,255,255,0.05);
-  }
-
-  .btn-accent {
-    background: var(--primary);
-    color: #fff;
-    font-weight: 700;
-  }
-
-  .btn-accent:hover {
-    background: var(--primary-dark);
-    transform: translateY(-1px);
-  }
-
-  .btn-yt {
-    background: #FF0000;
-    color: #fff;
-  }
-
-  .btn-yt:hover { background: #cc0000; transform: translateY(-1px); }
-
-  /* SECTIONS COMMON */
-  section {
-    padding: 100px max(5%, calc((100% - 1280px) / 2));
-  }
-
-  .section-label {
-    font-family: var(--font-mono);
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 18px;
-    display: flex; align-items: center; gap: 12px;
-  }
-
-  .section-label::after {
-    content: '';
-    flex: 1; max-width: 60px;
-    height: 2px;
-    background: var(--accent);
-    opacity: 1;
-    border-radius: 2px;
-  }
-
-  h2.section-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin-bottom: 20px;
-  }
-
-  h2.section-title span { color: var(--accent); }
-
-  .section-desc {
-    color: var(--muted);
-    font-size: 1rem;
-    max-width: 560px;
-    line-height: 1.7;
-  }
-
-
-  .btn-yt-hero {
-    display: inline-flex; align-items: center; gap: 16px;
-    background: #FF0000;
-    color: #fff;
-    text-decoration: none;
-    padding: 14px 28px;
-    border-radius: 12px;
-    transition: all 0.2s;
-    margin-top: 8px;
-  }
-
-  .btn-yt-hero:hover {
-    background: #cc0000;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(255,0,0,0.3);
-  }
-
-  .yt-icon {
-    font-size: 1.8rem;
-    line-height: 1;
-  }
-
-  .yt-text {
-    display: flex; flex-direction: column; text-align: left; gap: 2px;
-  }
-
-  .yt-label {
-    font-size: 1rem; font-weight: 700; line-height: 1;
-  }
-
-  .yt-sub {
-    font-size: 0.72rem; opacity: 0.85; font-weight: 400;
-    font-family: var(--font-mono);
-    letter-spacing: 0.02em;
-  }
-
-
-  .canal-tipos {
-    display: flex; flex-direction: column; gap: 16px;
-  }
-
-  .canal-tipo {
-    display: flex; align-items: flex-start; gap: 16px;
-    padding: 16px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    transition: border-color 0.2s;
-  }
-
-  .canal-tipo:hover { border-color: rgba(110,53,209,0.4); }
-
-  .canal-tipo-icon {
-    font-size: 1.4rem; line-height: 1;
-    margin-top: 2px;
-    flex-shrink: 0;
-  }
-
-  .canal-tipo-title {
-    font-size: 0.92rem; font-weight: 700;
-    margin-bottom: 3px;
-  }
-
-  .canal-tipo-desc {
-    font-size: 0.8rem; color: var(--muted);
-  }
-
-  /* CANAL */
-  #canal {
-    background: var(--surface);
-  }
-
-  .canal-inner {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-  }
-
-
-  .video-placeholder {
-    border-radius: 16px;
-    overflow: hidden;
-    aspect-ratio: 16/9;
-    background: var(--card);
-    border: 2px solid var(--primary);
-    display: flex; align-items: center; justify-content: center;
-  }
-
-  .video-placeholder-inner {
-    display: flex; flex-direction: column; align-items: center; gap: 12px;
-    color: var(--muted);
-    font-size: 0.9rem;
-    font-family: var(--font-mono);
-    letter-spacing: 0.05em;
-  }
-
-  .video-embed {
-    border-radius: 16px;
-    overflow: hidden;
-    position: relative;
-    padding-top: 56.25%;
-    background: #0F1318;
-    border: 1px solid var(--border);
-  }
-
-  .video-embed iframe {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    border: none;
-  }
-
-  .canal-cta {
-    display: inline-flex; align-items: center; gap: 8px;
-    color: #FF4444;
-    font-weight: 700;
-    font-size: 1rem;
-    text-decoration: none;
-    margin: 24px 0 16px;
-    transition: opacity 0.2s;
-  }
-
-  .canal-cta:hover { opacity: 0.75; }
-
-  /* CREATORS */
-  #creators {
-    text-align: center;
-  }
-
-  .creator-main {
-    display: flex; flex-direction: column; align-items: center; margin-bottom: 48px;
-  }
-
-  .creator-avatar-lg {
-    width: 150px; height: 150px;
-    border-radius: 50%;
-    border: 3px solid var(--primary);
-    object-fit: cover;
-    background: var(--card);
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
-  }
-
-  .avatar-placeholder {
-    width: 100%; height: 100%;
-    background: linear-gradient(135deg, #1a2535, #0f1318);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 4px;
-  }
-
-  .avatar-initials {
-    font-size: 2rem; font-weight: 800;
-    color: var(--primary);
-    font-family: var(--font-mono);
-  }
-
-  .creator-name {
-    font-size: 1.5rem; font-weight: 700; margin-top: 16px;
-  }
-
-  .creator-role {
-    color: var(--muted); font-size: 0.9rem; margin-top: 4px;
-  }
-
-  .creators-grid {
-    display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
-  }
-
-  .creator-card {
-    display: flex; flex-direction: column; align-items: center; gap: 10px;
-  }
-
-  .creator-avatar-sm {
-    width: 120px; height: 120px;
-    border-radius: 50%;
-    border: 2px solid var(--accent);
-    background: var(--card);
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
-    transition: border-color 0.2s;
-  }
-
-  .creator-card:hover .creator-avatar-sm { border-color: var(--primary); }
-
-  .creator-card-name { font-size: 0.95rem; color: var(--text); font-weight: 600; }
-  .creator-card-role { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
-
-  /* COMUNIDADE */
-  #comunidade {
-    background: var(--surface);
-  }
-
-  .stats-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px;
-    margin: 48px 0;
-  }
-
-  .stat-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    text-align: center;
-    transition: border-color 0.2s;
-  }
-
-  .stat-card:hover { border-color: rgba(110,53,209,0.8); border-width: 2px; }
-
-  .stat-num {
-    font-size: 2rem; font-weight: 800;
-    font-family: var(--font-mono);
-    color: var(--accent);
-  }
-
-  .stat-label {
-    font-size: 0.82rem; color: var(--muted);
-    margin-top: 6px;
-    line-height: 1.4;
-  }
-
-  /* SPEECHES / VÍDEOS */
-  .videos-section-header {
-    display: flex; align-items: flex-end; justify-content: space-between;
-    margin-bottom: 36px;
-  }
-
-  .speeches-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 24px;
-  }
-
-  .speech-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.2s, border-color 0.2s;
-    cursor: pointer;
-  }
-
-  .speech-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(56,182,255,0.9);
-    border-width: 2px;
-  }
-
-  .speech-thumb {
-    width: 100%; aspect-ratio: 16/9;
-    background: linear-gradient(135deg, #141920, #1c2535);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 2.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .speech-thumb::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.5));
-  }
-
-  .speech-tags {
-    display: flex; flex-wrap: wrap; gap: 6px;
-    margin-bottom: 10px;
-  }
-
-  .speech-tag {
-    font-family: var(--font-mono);
-    font-size: 0.63rem;
-    padding: 3px 10px;
-    border-radius: 100px;
-    display: inline-block;
-    letter-spacing: 0.08em;
-    font-weight: 700;
-    border: 1px solid transparent;
-    color: #ffffff !important;
-  }
-
-  .tag-carreira  { color: #fff; background: #d97706; border-color: transparent; }
-  .tag-ia        { color: #fff; background: #7c3aed; border-color: transparent; }
-  .tag-android   { color: #fff; background: #059669; border-color: transparent; }
-  .tag-flutter   { color: #fff; background: #0284c7; border-color: transparent; }
-  .tag-ios       { color: #fff; background: #db2777; border-color: transparent; }
-  .tag-kotlin    { color: #fff; background: #ea580c; border-color: transparent; }
-  .tag-obs       { color: #fff; background: #6d28d9; border-color: transparent; }
-
-  .speech-info {
-    padding: 16px;
-  }
-
-  .speech-title {
-    font-size: 0.9rem; font-weight: 700; line-height: 1.4; margin-bottom: 6px;
-  }
-
-  .speech-event {
-    font-size: 0.78rem; color: var(--muted);
-  }
-
-  /* INICIATIVAS */
-  #iniciativas {
-    background: var(--bg);
-  }
-
-  .iniciativas-list {
-    display: flex; flex-direction: column; gap: 20px;
-    margin-top: 48px;
-  }
-
-  .iniciativa-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    display: flex; align-items: stretch;
-    overflow: hidden;
-    transition: border-color 0.2s;
-    min-height: 260px;
-  }
-
-  .iniciativa-card:hover { border-color: var(--accent); border-width: 2px; }
-
-  .iniciativa-info {
-    padding: 28px 32px;
-    display: flex; flex-direction: column; justify-content: center;
-    flex: 1;
-    border-right: 1px solid var(--border);
-  }
-
-  .iniciativa-tag {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--accent);
-    border: 1px solid rgba(56,182,255,0.3);
-    padding: 3px 10px;
-    border-radius: 100px;
-    display: inline-block;
-    letter-spacing: 0.08em;
-    margin-bottom: 10px;
-    width: fit-content;
-  }
-
-  .iniciativa-name { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
-  .iniciativa-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
-
-  .iniciativa-media {
-    width: 420px; flex-shrink: 0;
-    background: #0a0e14;
-    display: block;
-    border-left: 2px solid var(--accent);
-    border-radius: 0 14px 14px 0;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .iniciativa-media img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-    position: absolute; inset: 0;
-  }
-
-  .media-placeholder {
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-    color: var(--muted); font-size: 0.75rem;
-    font-family: var(--font-mono); letter-spacing: 0.06em;
-  }
-
-  .media-placeholder-icon { font-size: 1.8rem; opacity: 0.5; }
-
-  .spotify-player {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    padding: 16px;
-  }
-
-  .media-placeholder {
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-    color: var(--muted);
-    font-size: 0.75rem;
-    font-family: var(--font-mono);
-    letter-spacing: 0.06em;
-  }
-
-  .media-placeholder-icon {
-    font-size: 1.8rem; opacity: 0.5;
-  }
-
-  .spotify-player {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    padding: 16px;
-  }
-
-  /* FOOTER */
-  footer {
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    padding: 60px max(5%, calc((100% - 1280px) / 2)) 40px;
-  }
-
-  .footer-inner {
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 24px;
-    margin-bottom: 40px;
-  }
-
-  .footer-logo {
-    font-family: var(--font-mono);
-    font-size: 1.2rem; font-weight: 700;
-    color: var(--text);
-  }
-
-  .footer-logo span { color: var(--accent); }
-
-  .footer-socials {
-    display: flex; gap: 16px;
-  }
-
-  .social-link {
-    width: 40px; height: 40px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    text-decoration: none;
-    font-size: 1.1rem;
-    transition: all 0.2s;
-    color: var(--muted);
-  }
-
-  .social-link:hover {
-    border-color: rgba(255,255,255,0.25);
-    color: var(--text);
-    background: rgba(255,255,255,0.05);
-  }
-
-  .footer-bottom {
-    border-top: 1px solid var(--border);
-    padding-top: 24px;
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 12px;
-  }
-
-  .footer-copy {
-    font-size: 0.82rem; color: var(--muted);
-  }
-
-  .footer-email {
-    font-size: 0.82rem; color: var(--accent);
-    text-decoration: none;
-  }
-
-
-  /* Seções pares → roxo */
-  .even-section .section-label { color: var(--even); }
-  .even-section .section-label::after { background: var(--even); }
-  .even-section h2.section-title span { color: var(--even); }
-  .even-section .canal-cta { color: #FF4444; }
-  .even-section .stat-num { color: var(--even); }
-  .even-section .stat-card:hover { border-color: rgba(110,53,209,0.9); border-width: 2px; }
-  .even-section .speech-tag { color: var(--even); border-color: rgba(110,53,209,0.4); }
-  .even-section .speech-card:hover { border-color: rgba(110,53,209,0.9); border-width: 2px; }
-
-  /* Seções ímpares → azul */
-  .odd-section .section-label { color: var(--odd); }
-  .odd-section .section-label::after { background: var(--odd); }
-  .odd-section h2.section-title span { color: var(--odd); }
-  .odd-section .creator-avatar-lg { border-color: var(--odd); }
-  .odd-section .avatar-initials { color: var(--odd); }
-  .odd-section .creator-card:hover .creator-avatar-sm { border-color: var(--odd); }
-
-
-
-
-
-  .libs-wrapper {
-    margin-top: 48px;
-    overflow: hidden;
-  }
-
-  .libs-tabs {
-    display: flex; gap: 8px; flex-wrap: wrap;
-    margin-bottom: 24px;
-  }
-
-  .libs-tab {
-    padding: 8px 20px;
-    border-radius: 8px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: transparent;
-    color: #8A909C;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: var(--font-mono);
-    letter-spacing: 0.04em;
-  }
-
-  .libs-tab.active {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: #fff;
-  }
-
-  .libs-tab:hover:not(.active) {
-    border-color: rgba(255,255,255,0.25);
-    color: var(--text);
-  }
-
-  .libs-content {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 36px;
-    overflow: hidden;
-  }
-
-  .libs-info {}
-
-  .libs-lang {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 0.72rem; color: #8A909C;
-    font-family: var(--font-mono);
-    margin-bottom: 12px;
-  }
-
-  .libs-lang-dot {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: #7C52FF;
-    display: inline-block;
-  }
-
-  .libs-lang-dot.dart { background: #00B4AB; }
-
-  .libs-title {
-    font-size: 1.4rem; font-weight: 800;
-    color: var(--text);
-    margin-bottom: 12px;
-  }
-
-  .libs-title a {
-    color: var(--accent);
-    text-decoration: none;
-  }
-
-  .libs-title a:hover { text-decoration: underline; }
-
-  .libs-desc {
-    font-size: 0.88rem; color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
-
-  .libs-stats {
-    display: flex; gap: 20px;
-  }
-
-  .libs-stat {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 0.82rem; color: var(--muted);
-    font-family: var(--font-mono);
-  }
-
-  .libs-media {
-    aspect-ratio: 16/9;
-    min-height: 160px;
-    background: #0a0e14;
-    border: 2px solid var(--primary);
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--muted);
-    font-size: 0.72rem;
-    font-family: var(--font-mono);
-    letter-spacing: 0.06em;
-    overflow: hidden;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  @media (max-width: 768px) {
-    .libs-content { grid-template-columns: 1fr; }
-  }
-
-  /* ANIMATIONS */
-  .fade-in {
-    opacity: 1; transform: none;
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .fade-in.hidden { opacity: 0; transform: translateY(24px); }
-  .fade-in.visible { opacity: 1; transform: none; }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    .canal-inner { grid-template-columns: 1fr; gap: 40px; }
-    .nav-links { display: none; }
-    .videos-section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-
-    .libs-content { grid-template-columns: 1fr; }
-    .libs-media { min-height: 200px; }
-    .speeches-grid { grid-template-columns: 1fr; }
-    .stats-grid { grid-template-columns: 1fr 1fr; }
-
-    .iniciativa-card {
-      flex-direction: column;
-      min-height: unset;
-    }
-
-    .iniciativa-info {
-      border-right: none;
-      border-bottom: 1px solid var(--border);
-      padding: 20px;
-    }
-
-    .iniciativa-media {
-      width: 100%;
-      height: 220px;
-      border-radius: 0 0 14px 14px;
-      border-left: none;
-      border-top: 2px solid var(--accent);
-    }
-  }
-
-  /* DIVIDER */
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 0 5%;
-  }
-
-  /* SCROLL INDICATOR */
-  .scroll-hint {
-    position: absolute; bottom: 40px; left: 50%;
-    transform: translateX(-50%);
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-    color: var(--muted); font-size: 0.72rem;
-    font-family: var(--font-mono);
-    letter-spacing: 0.1em;
-    animation: bounce 2s infinite;
-  }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(6px); }
-  }
-
-  .scroll-line {
-    width: 1px; height: 40px;
-    background: linear-gradient(to bottom, var(--muted), transparent);
-  }
-</style>
-
-<script>
-var data=[
-  {title:'CraftD',desc:'Um framework para implementar Server-Driven UI de forma rápida e simples em Android, iOS, Flutter e KMP. Permite que as interfaces sejam controladas pelo servidor, tornando as atualizações mais ágeis e sem necessidade de publicar uma nova versão do app.',netflix:false,dart:false,craftd:true,img:'assets/images/libs/CraftD.mp4',video:true},
-  {title:'popcorn-guineapig',desc:'Um plugin leve para forçar regras de arquitetura em projetos multi-módulo. Garante que as fronteiras entre módulos sejam respeitadas sem esforço.',netflix:false,dart:false,craftd:false,img:'assets/images/libs/popcorn-guineapig.png',video:false},
-  {title:'eagle-eye',desc:'Uma ferramenta CLI em Dart para enforçar regras de arquitetura em projetos Flutter/Dart. Mantém o código organizado e as dependências sob controle.',netflix:false,dart:true,craftd:false,img:'assets/images/libs/eagle-eye.png',video:false},
-  {title:'jujubaSVG',desc:'Uma biblioteca para manipular arquivos SVG em apps Android e Flutter, criada pela CodandoTV para facilitar o uso de SVGs dinâmicos no mobile.',netflix:false,dart:false,craftd:false,img:'assets/images/libs/jujubaSVG.png',video:false},
-  {title:'Netflix',desc:'StreamPlayerApp virou dois projetos de estudo para a comunidade, com exemplos de arquitetura moderna e boas práticas em Android nativo e Kotlin Multiplatform.',netflix:true,dart:false,craftd:false,img:'assets/images/libs/Netflix.png',video:false}
-];
-
-function selectLib(i,btn){
-  document.querySelectorAll('.libs-tab').forEach(function(t){t.classList.remove('active');});
-  btn.classList.add('active');
-  var d=data[i];
-  var lc=document.getElementById('libsContent');
-  if(!lc)return;
-  var dotColor=d.dart?'#00B4AB':'#7C52FF';
-  var lang=d.dart?'Dart':'Kotlin';
-  var langHtml;
-  if(d.craftd){
-    langHtml='<div class="libs-lang"><span style="width:10px;height:10px;border-radius:50%;background:#7C52FF;display:inline-block;margin-right:4px;"></span>Android <span style="width:10px;height:10px;border-radius:50%;background:#38b6ff;display:inline-block;margin:0 4px 0 8px;"></span>iOS <span style="width:10px;height:10px;border-radius:50%;background:#54C5F8;display:inline-block;margin:0 4px 0 8px;"></span>Flutter <span style="width:10px;height:10px;border-radius:50%;background:#B069FF;display:inline-block;margin:0 4px 0 8px;"></span>KMP</div>';
-  } else {
-    langHtml='<div class="libs-lang"><span style="width:10px;height:10px;border-radius:50%;background:'+dotColor+';display:inline-block;margin-right:6px;"></span>'+lang+'</div>';
-  }
-  var titleHtml=d.netflix
-    ?'<div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap;"><div style="flex:1;min-width:140px;background:#1a1f2a;border:1px solid rgba(56,182,255,.2);border-radius:10px;padding:14px;"><div style="font-size:1rem;font-weight:800;color:#F0F2F5;margin-bottom:4px;">Netflix-Android</div><div style="font-size:.72rem;color:#8A909C;">&#9733; 59</div></div><div style="flex:1;min-width:140px;background:#1a1f2a;border:1px solid rgba(56,182,255,.2);border-radius:10px;padding:14px;"><div style="font-size:1rem;font-weight:800;color:#F0F2F5;margin-bottom:4px;">Netflix-KMP</div><div style="font-size:.72rem;color:#8A909C;">&#9733; 27</div></div></div>'
-    :'<div class="libs-title">'+d.title+'</div>';
-  var mediaHtml = d.video
-    ? '<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;border-radius:10px;"><source src="'+d.img+'" type="video/mp4"></video>'
-    : '<img src="'+d.img+'" alt="'+d.title+'" style="width:100%;height:100%;object-fit:cover;border-radius:10px;" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div style="display:none;align-items:center;justify-content:center;width:100%;height:100%;color:var(--muted);font-size:0.72rem;font-family:var(--font-mono);letter-spacing:.06em;">print / demo em breve</div>';
-  lc.innerHTML='<div class="libs-info">'+langHtml+titleHtml+'<p class="libs-desc">'+d.desc+'</p></div><div class="libs-media" style="background:#0a0e14;padding:0;overflow:hidden;">'+mediaHtml+'</div>';
-}
-
-document.addEventListener('DOMContentLoaded',function(){
-  document.querySelectorAll('.fade-in').forEach(function(el){el.classList.add('hidden');});
-  var obs=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){e.target.classList.remove('hidden');e.target.classList.add('visible');obs.unobserve(e.target);}
-    });
-  },{threshold:0.1});
-  document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el);});
-
-  // Autoplay vídeo "Conheça o Canal" ao entrar na viewport
-  var canalVideo = document.getElementById('canal-video');
-  if(canalVideo){
-    var videoObs = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){
-          canalVideo.play();
-        } else {
-          canalVideo.pause();
-        }
-      });
-    },{threshold:0.5});
-    videoObs.observe(canalVideo);
-  }
-});
-</script>
 </head>
+
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#home" class="nav-logo"><span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #fff;">Codando</span><span style="font-family: 'Outfit', sans-serif; font-weight: 900; color: var(--primary);">&lt;TV/&gt;</span></a>
-  <ul class="nav-links">
-    <li><a href="#canal">Conheça o Canal</a></li>
-    <li><a href="#creators">CodandoCreators</a></li>
-    <li><a href="#comunidade">Comunidade</a></li>
-    <li><a href="#iniciativas">Iniciativas</a></li>
-  </ul>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <a href="#home" class="nav-logo"><span
+        style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #fff;">Codando</span><span
+        style="font-family: 'Outfit', sans-serif; font-weight: 900; color: var(--primary);">&lt;TV/&gt;</span></a>
+    <ul class="nav-links">
+      <li><a href="#canal">Conheça o Canal</a></li>
+      <li><a href="#creators">CodandoCreators</a></li>
+      <li><a href="#comunidade">Comunidade</a></li>
+      <li><a href="#iniciativas">Iniciativas</a></li>
+    </ul>
+  </nav>
 
-<!-- HERO -->
-<section id="home">
-  <video class="hero-video" autoplay muted loop playsinline src="assets/videos/fundo1.mp4"></video>
-  <div class="hero-overlay"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
+  <!-- HERO -->
+  <section id="home">
+    <video class="hero-video" autoplay muted loop playsinline src="assets/videos/fundo1.mp4"></video>
+    <div class="hero-overlay"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
 
-  <div class="hero-badge">Conteúdo e projetos para a comunidade</div>
+    <div class="hero-badge">Conteúdo e projetos para a comunidade</div>
 
-  <h1 class="hero-title fade-in">
-    <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #fff;">Codando</span><span style="font-family: 'Outfit', sans-serif; font-weight: 900; color: var(--primary);">&lt;TV/&gt;</span>
-  </h1>
+    <h1 class="hero-title fade-in">
+      <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #fff;">Codando</span><span
+        style="font-family: 'Outfit', sans-serif; font-weight: 900; color: var(--primary);">&lt;TV/&gt;</span>
+    </h1>
 
-  <p class="hero-sub fade-in" style="transition-delay: 0.1s;">
-    É um espaço para aprender, compartilhar conhecimento e construir projetos com a comunidade através de conteúdo técnico, vídeos de opinião, podcasts, mentorias e open source.
-  </p>
+    <p class="hero-sub fade-in" style="transition-delay: 0.1s;">
+      É um espaço para aprender, compartilhar conhecimento e construir projetos com a comunidade através de conteúdo
+      técnico, vídeos de opinião, podcasts, mentorias e open source.
+    </p>
 
-  <div class="hero-socials fade-in" style="transition-delay: 0.2s;">
-    <a href="https://chat.whatsapp.com/BA3c4f1zJifCN9k1c4YaFj" target="_blank" class="btn btn-outline" style="border-color: var(--primary); color: var(--text); width: 148px; justify-content: center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity:.8;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> WhatsApp</a>
-    <a href="https://github.com/CodandoTV" target="_blank" class="btn btn-outline" style="border-color: var(--primary); color: var(--text); width: 148px; justify-content: center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity:.8;flex-shrink:0;"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg> GitHub</a>
-  </div>
-
-  <a href="https://www.youtube.com/c/CodandoTV" target="_blank" class="btn-yt-hero fade-in" style="transition-delay: 0.3s;">
-    <span class="yt-icon">▶</span>
-    <span class="yt-text">
-      <span class="yt-label">Conheça nosso canal no YouTube</span>
-      <span class="yt-sub">Inscreva-se no canal</span>
-    </span>
-  </a>
-
-  <div class="scroll-hint">
-    <div class="scroll-line"></div>
-    scroll
-  </div>
-</section>
-
-<!-- CANAL -->
-<section id="canal" class="even-section">
-  <div class="canal-inner">
-    <div class="fade-in">
-      <div class="section-label">Sobre o canal</div>
-      <h2 class="section-title">Conheça o <span>Canal</span></h2>
-      <p class="section-desc" style="margin-bottom: 20px;">
-        O CodandoTV nasceu como um espaço aberto para aprender, compartilhar conhecimento e criar junto com a comunidade. Nunca foi só sobre programação. A ideia sempre foi também trocar experiências sobre tecnologia, carreira e a vivência real de quem trabalha na área.
-      </p>
-      <p class="section-desc" style="margin-bottom: 20px;">
-        Aqui você vai encontrar conteúdo técnico, vídeos de opinião, reacts, podcasts com convidados e mentorias. O canal cresce junto com a comunidade, acompanhando assuntos que geram valor, conversa e aprendizado de verdade.
-      </p>
-      <p class="section-desc">
-        Além disso, o CodandoTV também tem projetos open source no GitHub, criados para que mais pessoas possam usar, estudar e contribuir. O objetivo é construir coisas úteis para a comunidade de forma aberta e colaborativa.
-      </p>
+    <div class="hero-socials fade-in" style="transition-delay: 0.2s;">
+      <a href="https://chat.whatsapp.com/BA3c4f1zJifCN9k1c4YaFj" target="_blank" class="btn btn-outline"
+        style="border-color: var(--primary); color: var(--text); width: 148px; justify-content: center;"><svg width="16"
+          height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity:.8;flex-shrink:0;">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+        </svg> WhatsApp</a>
+      <a href="https://github.com/CodandoTV" target="_blank" class="btn btn-outline"
+        style="border-color: var(--primary); color: var(--text); width: 148px; justify-content: center;"><svg width="16"
+          height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity:.8;flex-shrink:0;">
+          <path
+            d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+        </svg> GitHub</a>
     </div>
-    <div class="video-embed fade-in" style="transition-delay: 0.15s;">
-      <video id="canal-video" controls muted style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:16px;" poster="">
-        <source src="assets/videos/conheca_canal.mp4" type="video/mp4">
-      </video>
-    </div>
-  </div>
-</section>
 
-<!-- CREATORS -->
-<section id="creators" class="odd-section">
-  <div class="section-label">Quem faz acontecer</div>
-  <h2 class="section-title">Codando<span>Creators</span></h2>
-  <p class="section-desc" style="margin: 0 auto 60px; text-align: center;">
-    Conheça as pessoas por trás dos conteúdos e iniciativas do CodandoTV.
-  </p>
-
-  <div class="creator-main fade-in">
-    <a href="https://www.linkedin.com/in/rviannaoliveira/" target="_blank" style="text-decoration:none;">
-      <div class="creator-avatar-lg">
-        <img src="assets/images/rodrigo.jpg" alt="Rodrigo Vianna" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="avatar-placeholder" style="display:none;"><div class="avatar-initials">RV</div></div>
-      </div>
+    <a href="https://www.youtube.com/c/CodandoTV" target="_blank" class="btn-yt-hero fade-in"
+      style="transition-delay: 0.3s;">
+      <span class="yt-icon">▶</span>
+      <span class="yt-text">
+        <span class="yt-label">Conheça nosso canal no YouTube</span>
+        <span class="yt-sub">Inscreva-se no canal</span>
+      </span>
     </a>
-    <div class="creator-name">Rodrigo Vianna <span style="color:var(--muted);font-weight:400;font-size:1rem;">(Rods)</span></div>
-    <div class="creator-role">Fundador · Engenheiro Mobile</div>
-  </div>
 
-  <div class="creators-grid">
-    <div class="creator-card fade-in" style="transition-delay: 0.1s;">
-      <a href="https://www.linkedin.com/in/jrmartins/" target="_blank" style="text-decoration:none;">
-        <div class="creator-avatar-sm">
-          <img src="assets/images/junior.jpg" alt="Junior Martins" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-          <div class="avatar-placeholder" style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">JM</div>
-        </div>
-      </a>
-      <div class="creator-card-name">Junior Martins</div>
-      <div class="creator-card-role">Engenheiro Mobile</div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      scroll
     </div>
-    <div class="creator-card fade-in" style="transition-delay: 0.2s;">
-      <a href="https://www.linkedin.com/in/gabrielbronzattimoro15031994/" target="_blank" style="text-decoration:none;">
-        <div class="creator-avatar-sm">
-          <img src="assets/images/moro.jpg" alt="Gabriel Moro" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-          <div class="avatar-placeholder" style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">GM</div>
-        </div>
-      </a>
-      <div class="creator-card-name">Gabriel Moro</div>
-      <div class="creator-card-role">Engenheiro Mobile</div>
-    </div>
-    <div class="creator-card fade-in" style="transition-delay: 0.3s;">
-      <a href="https://www.linkedin.com/in/pedro-alvarez94/" target="_blank" style="text-decoration:none;">
-        <div class="creator-avatar-sm">
-          <img src="assets/images/pedro.jpg" alt="Pedro Alvarez" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-          <div class="avatar-placeholder" style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">PA</div>
-        </div>
-      </a>
-      <div class="creator-card-name">Pedro Alvarez</div>
-      <div class="creator-card-role">Engenheiro Mobile</div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<div class="divider"></div>
-
-<!-- COMUNIDADE -->
-<section id="comunidade" class="even-section" style="background: var(--surface);">
-  <div class="section-label">Iniciativas</div>
-  <h2 class="section-title fade-in">Codando <span>Comunidade</span></h2>
-  <p class="section-desc fade-in">Projetos open source, ferramentas e iniciativas criadas para e pela comunidade dev. <a href="https://github.com/CodandoTV" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:700;">Ver tudo no GitHub →</a></p>
-
-  <div class="stats-grid">
-    <div class="stat-card fade-in">
-      <div class="stat-num">⭐ 200+</div>
-      <div class="stat-label">Estrelas nos repositórios</div>
-    </div>
-    <div class="stat-card fade-in" style="transition-delay: 0.1s;">
-      <div class="stat-num" style="font-size:1.4rem;">Open Source</div>
-      <div class="stat-label">Aberto para a comunidade</div>
-    </div>
-    <div class="stat-card fade-in" style="transition-delay: 0.2s;">
-      <div class="stat-num">↓ 1K+</div>
-      <div class="stat-label">Downloads e em uso</div>
-    </div>
-    <div class="stat-card fade-in" style="transition-delay: 0.3s;">
-      <div class="stat-num">15</div>
-      <div class="stat-label">Contribuidores</div>
-    </div>
-  </div>
-  </div>
-  </div>
-
-  <div class="libs-wrapper">
-    <div class="libs-tabs" id="libsTabs">
-      <button class="libs-tab active" onclick="selectLib(0, this)">CraftD</button>
-      <button class="libs-tab" onclick="selectLib(1, this)">popcorn-guineapig</button>
-      <button class="libs-tab" onclick="selectLib(2, this)">eagle-eye</button>
-      <button class="libs-tab" onclick="selectLib(3, this)">jujubaSVG</button>
-      <button class="libs-tab" onclick="selectLib(4, this)">Netflix</button>
-    </div>
-
-    <div class="libs-content" id="libsContent">
-      <div class="libs-info">
-        <div class="libs-lang">
-          <span style="width:10px;height:10px;border-radius:50%;background:#7C52FF;display:inline-block;margin-right:4px;"></span>Android
-          <span style="width:10px;height:10px;border-radius:50%;background:#38b6ff;display:inline-block;margin:0 4px 0 12px;"></span>iOS
-          <span style="width:10px;height:10px;border-radius:50%;background:#54C5F8;display:inline-block;margin:0 4px 0 12px;"></span>Flutter
-          <span style="width:10px;height:10px;border-radius:50%;background:#B069FF;display:inline-block;margin:0 4px 0 12px;"></span>KMP
-        </div>
-        <div class="libs-title">CraftD</div>
-        <p class="libs-desc">Um framework para implementar Server-Driven UI de forma rápida e simples em Android, iOS, Flutter e KMP. Permite que as interfaces sejam controladas pelo servidor, tornando as atualizações mais ágeis e sem necessidade de publicar uma nova versão do app.</p>
+  <!-- CANAL -->
+  <section id="canal" class="even-section">
+    <div class="canal-inner">
+      <div class="fade-in">
+        <div class="section-label">Sobre o canal</div>
+        <h2 class="section-title">Conheça o <span>Canal</span></h2>
+        <p class="section-desc" style="margin-bottom: 20px;">
+          O CodandoTV nasceu como um espaço aberto para aprender, compartilhar conhecimento e criar junto com a
+          comunidade. Nunca foi só sobre programação. A ideia sempre foi também trocar experiências sobre tecnologia,
+          carreira e a vivência real de quem trabalha na área.
+        </p>
+        <p class="section-desc" style="margin-bottom: 20px;">
+          Aqui você vai encontrar conteúdo técnico, vídeos de opinião, reacts, podcasts com convidados e mentorias. O
+          canal cresce junto com a comunidade, acompanhando assuntos que geram valor, conversa e aprendizado de verdade.
+        </p>
+        <p class="section-desc">
+          Além disso, o CodandoTV também tem projetos open source no GitHub, criados para que mais pessoas possam usar,
+          estudar e contribuir. O objetivo é construir coisas úteis para a comunidade de forma aberta e colaborativa.
+        </p>
       </div>
-      <div class="libs-media" style="background:#0a0e14;padding:0;overflow:hidden;">
-        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
-          <source src="assets/images/libs/CraftD.mp4" type="video/mp4">
+      <div class="video-embed fade-in" style="transition-delay: 0.15s;">
+        <video id="canal-video" controls muted
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:16px;" poster="">
+          <source src="assets/videos/conheca_canal.mp4" type="video/mp4">
         </video>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="videos-section-header fade-in" style="margin-top: 64px;">
-    <div>
-      <div class="section-label">Para começar</div>
-      <h2 class="section-title" style="font-size: 1.8rem;">Vídeos úteis para <span>começar</span></h2>
-    </div>
-  </div>
+  <!-- CREATORS -->
+  <section id="creators" class="odd-section">
+    <div class="section-label">Quem faz acontecer</div>
+    <h2 class="section-title">Codando<span>Creators</span></h2>
+    <p class="section-desc" style="margin: 0 auto 60px; text-align: center;">
+      Conheça as pessoas por trás dos conteúdos e iniciativas do CodandoTV.
+    </p>
 
-  <div class="speeches-grid">
-    <div class="speech-card fade-in">
-      <div class="video-embed" style="border-radius:12px 12px 0 0;">
-        <iframe src="https://www.youtube.com/embed/Biqa9X2LDTo" title="Como entrar em TI" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-      </div>
-      <div class="speech-info">
-        <div class="speech-tags">
-          <span class="speech-tag tag-carreira">Carreira</span>
+    <div class="creator-main fade-in">
+      <a href="https://www.linkedin.com/in/rviannaoliveira/" target="_blank" style="text-decoration:none;">
+        <div class="creator-avatar-lg">
+          <img src="assets/images/rodrigo.jpg" alt="Rodrigo Vianna" style="width:100%;height:100%;object-fit:cover;"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="avatar-placeholder" style="display:none;">
+            <div class="avatar-initials">RV</div>
+          </div>
         </div>
-        <div class="speech-title">Como Entrar em TI: Guia Completo de Carreiras</div>
-        <div class="speech-event">16 profissionais explicam cada área: Produto, Cloud, Mobile, IA, DevOps e muito mais.</div>
-      </div>
-    </div>
-
-    <div class="speech-card fade-in" style="transition-delay: 0.1s;">
-      <div class="video-embed" style="border-radius:12px 12px 0 0;">
-        <iframe src="https://www.youtube.com/embed/syEhtDfAbBM" title="8 Estágios de Confiabilidade da IA" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-      </div>
-      <div class="speech-info">
-        <div class="speech-tags">
-          <span class="speech-tag tag-ia">IA</span>
-        </div>
-        <div class="speech-title">8 Estágios de Confiabilidade da IA para Devs</div>
-        <div class="speech-event">Claude Code, Cursor, agentes e produtividade. Como a confiança no uso de IA evolui na prática.</div>
-      </div>
-    </div>
-
-    <div class="speech-card fade-in" style="transition-delay: 0.2s;">
-      <div class="video-embed" style="border-radius:12px 12px 0 0;">
-        <iframe src="https://www.youtube.com/embed/Co-e1QPD73M" title="CraftD: Server Driven UI" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-      </div>
-      <div class="speech-info">
-        <div class="speech-tags">
-          <span class="speech-tag tag-android">Android</span>
-          <span class="speech-tag tag-flutter">Flutter</span>
-          <span class="speech-tag tag-ios">iOS</span>
-        </div>
-        <div class="speech-title">CraftD: Server Driven UI para Todas as Plataformas</div>
-        <div class="speech-event">Telas dinâmicas sem release. A solução open source da comunidade CodandoTV para SDUI multiplataforma.</div>
-      </div>
-    </div>
-
-    <div class="speech-card fade-in" style="transition-delay: 0.3s;">
-      <div class="video-embed" style="border-radius:12px 12px 0 0;">
-        <iframe src="https://www.youtube.com/embed/O9g7RX6OrRI" title="Kotzilla no Compose Multiplatform" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-      </div>
-      <div class="speech-info">
-        <div class="speech-tags">
-          <span class="speech-tag tag-obs">Observabilidade</span>
-        </div>
-        <div class="speech-title">Kotzilla no Compose Multiplatform: Setup Completo</div>
-        <div class="speech-event">Observabilidade gratuita para open source. Analise comportamento, performance e issues do seu app KMP.</div>
-      </div>
-    </div>
-
-    <div class="speech-card fade-in" style="transition-delay: 0.4s;">
-      <div class="video-embed" style="border-radius:12px 12px 0 0;">
-        <iframe src="https://www.youtube.com/embed/uLNIxp5YZ9k" title="Mockito no Flutter" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-      </div>
-      <div class="speech-info">
-        <div class="speech-tags">
-          <span class="speech-tag tag-flutter">Flutter</span>
-        </div>
-        <div class="speech-title">Mockito no Flutter: Testes Unitários com Mocks</div>
-        <div class="speech-event">Como usar mocks para criar testes unitários mais confiáveis, rápidos e desacoplados no ecossistema Flutter.</div>
-      </div>
-    </div>
-
-    <div class="speech-card fade-in" style="transition-delay: 0.5s;">
-      <div class="video-embed" style="border-radius:12px 12px 0 0;">
-        <iframe src="https://www.youtube.com/embed/Hf7DV8asMT8" title="O Que é Kotlin Multiplatform" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-      </div>
-      <div class="speech-info">
-        <div class="speech-tags">
-          <span class="speech-tag tag-kotlin">Kotlin</span>
-        </div>
-        <div class="speech-title">O Que é Kotlin Multiplatform em 10 Minutos</div>
-        <div class="speech-event">Compartilhe código entre Android, iOS e Web. Entenda como o KMP funciona e como começar a usar nos seus projetos.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- INICIATIVAS -->
-<section id="iniciativas" class="odd-section">
-  <div class="section-label">Outras formas de se conectar</div>
-  <h2 class="section-title fade-in">Outras <span>Iniciativas</span></h2>
-  <p class="section-desc fade-in" style="margin-bottom: 0;">Além do YouTube, a comunidade vive em vários lugares. Escolha o canal que faz mais sentido pra você.</p>
-  <div class="iniciativas-list">
-
-    <div class="iniciativa-card fade-in">
-      <div class="iniciativa-info">
-        <span class="iniciativa-tag">Comunidade</span>
-        <div class="iniciativa-name">WhatsApp & Discord</div>
-        <div class="iniciativa-desc" style="margin-bottom:14px;">Grupo ativo com devs, vagas, dicas e discussões diárias sobre tech e carreira.</div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <a href="https://chat.whatsapp.com/BA3c4f1zJifCN9k1c4YaFj" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;font-size:0.72rem;font-weight:700;padding:6px 14px;border-radius:6px;text-decoration:none;white-space:nowrap;">Participe no WhatsApp</a>
-          <a href="https://discord.gg/zhgzdeTp" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#5865F2;color:#fff;font-size:0.72rem;font-weight:700;padding:6px 14px;border-radius:6px;text-decoration:none;white-space:nowrap;">Participe no Discord</a>
-        </div>
-      </div>
-      <div class="iniciativa-media">
-        <img src="assets/images/comunidade.png" alt="Comunidade" onerror="this.style.display='none'">
-      </div>
-    </div>
-
-    <div class="iniciativa-card fade-in" style="transition-delay: 0.1s;">
-      <div class="iniciativa-info">
-        <span class="iniciativa-tag">Artigos</span>
-        <div class="iniciativa-name">Medium</div>
-        <div class="iniciativa-desc" style="margin-bottom:14px;">Textos técnicos, opiniões e análises aprofundadas sobre o mundo dev.</div>
-        <a href="https://medium.com/codandotv/all" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#fff;color:#000;font-size:0.72rem;font-weight:700;padding:6px 14px;border-radius:6px;text-decoration:none;white-space:nowrap;">Ler no Medium</a>
-      </div>
-      <div class="iniciativa-media">
-        <img src="assets/images/artigos.png" alt="Artigos" onerror="this.style.display='none'">
-      </div>
-    </div>
-
-    <div class="iniciativa-card fade-in" style="transition-delay: 0.2s;">
-      <div class="iniciativa-info">
-        <span class="iniciativa-tag">Podcast</span>
-        <div class="iniciativa-name">Spotify</div>
-        <div class="iniciativa-desc">Episódios com convidados, histórias de carreira e papos sobre tecnologia.</div>
-      </div>
-      <div class="iniciativa-media" style="display:flex;">
-        <iframe style="border-radius:0 14px 14px 0;" src="https://open.spotify.com/embed/episode/3gCgHlOGJS9ZAlWDUHZhVa?utm_source=generator&theme=0" width="100%" height="100%" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      </div>
-    </div>
-
-    <div class="iniciativa-card fade-in" style="transition-delay: 0.3s;">
-      <div class="iniciativa-info">
-        <span class="iniciativa-tag">Curso</span>
-        <div class="iniciativa-name">Curso Kotlin Multiplatform</div>
-        <div class="iniciativa-desc" style="margin-bottom: 12px;">
-          Aprenda a compartilhar código entre Android e iOS usando Kotlin Multiplatform. Um curso prático, direto ao ponto, feito para desenvolvedores que querem entrar no ecossistema KMP sem rodeios.
-        </div>
-        <div class="iniciativa-desc" style="font-size: 0.78rem; border-left: 2px solid var(--accent); padding-left: 12px; margin-bottom: 16px;">
-          Este curso tem como foco principal o ecossistema KMP. Não é um curso introdutório de Kotlin como linguagem, nem aprofunda arquitetura moderna ou Android nativo. A proposta é ajudar desenvolvedores a entenderem como compartilhar código entre Android e iOS de forma prática e direta.
-        </div>
-        <a href="https://www.udemy.com/course/kotlin-multiplatform-domine-do-basico-ao-intermediario/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--primary);color:#fff;font-size:0.78rem;font-weight:700;padding:8px 18px;border-radius:8px;text-decoration:none;">🎓 Quero conhecer o curso</a>
-      </div>
-      <div class="iniciativa-media" style="display:flex;">
-        <iframe style="width:100%;height:100%;border:none;border-radius:0 14px 14px 0;" src="https://www.youtube.com/embed/2_dYJr1s5Ak" title="Curso KMP" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-logo"><span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #fff;">Codando</span><span style="font-family: 'Outfit', sans-serif; font-weight: 900; color: var(--primary);">&lt;TV/&gt;</span></div>
-    <div class="footer-socials">
-      <a href="https://youtube.com/@codandotv" class="social-link" title="YouTube" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity:.7;"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
       </a>
-      <a href="https://chat.whatsapp.com/BA3c4f1zJifCN9k1c4YaFj" target="_blank" class="social-link" title="WhatsApp">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity:.7;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-      </a>
-      <a href="https://www.linkedin.com/in/rviannaoliveira/" target="_blank" class="social-link" title="LinkedIn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity:.7;"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      </a>
-      <a href="https://medium.com/codandotv/all" target="_blank" class="social-link" title="Medium">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity:.7;"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
-      </a>
-      <a href="https://github.com/CodandoTV" class="social-link" title="GitHub" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity:.7;"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-      </a>
+      <div class="creator-name">Rodrigo Vianna <span
+          style="color:var(--muted);font-weight:400;font-size:1rem;">(Rods)</span></div>
+      <div class="creator-role">Fundador · Engenheiro Mobile</div>
     </div>
-    <a onclick="window.location.href='mai'+'lto:codando.tv@gmail.com'" style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:8px;background:var(--accent);color:#080B10;font-weight:700;font-size:0.85rem;text-decoration:none;cursor:pointer;">Fale conosco</a>
-  </div>
-  <div class="footer-bottom">
-    <p class="footer-copy">© 2025 Rodrigo Vianna Calixto de Oliveira. Todos os direitos reservados.</p>
-  </div>
-</footer>
+
+    <div class="creators-grid">
+      <div class="creator-card fade-in" style="transition-delay: 0.1s;">
+        <a href="https://www.linkedin.com/in/jrmartins/" target="_blank" style="text-decoration:none;">
+          <div class="creator-avatar-sm">
+            <img src="assets/images/junior.jpg" alt="Junior Martins" style="width:100%;height:100%;object-fit:cover;"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="avatar-placeholder"
+              style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">JM
+            </div>
+          </div>
+        </a>
+        <div class="creator-card-name">Junior Martins</div>
+        <div class="creator-card-role">Engenheiro Mobile</div>
+      </div>
+      <div class="creator-card fade-in" style="transition-delay: 0.2s;">
+        <a href="https://www.linkedin.com/in/gabrielbronzattimoro15031994/" target="_blank"
+          style="text-decoration:none;">
+          <div class="creator-avatar-sm">
+            <img src="assets/images/moro.jpg" alt="Gabriel Moro" style="width:100%;height:100%;object-fit:cover;"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="avatar-placeholder"
+              style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">GM
+            </div>
+          </div>
+        </a>
+        <div class="creator-card-name">Gabriel Moro</div>
+        <div class="creator-card-role">Engenheiro Mobile</div>
+      </div>
+      <div class="creator-card fade-in" style="transition-delay: 0.3s;">
+        <a href="https://www.linkedin.com/in/pedro-alvarez94/" target="_blank" style="text-decoration:none;">
+          <div class="creator-avatar-sm">
+            <img src="assets/images/pedro.jpg" alt="Pedro Alvarez" style="width:100%;height:100%;object-fit:cover;"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="avatar-placeholder"
+              style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">PA
+            </div>
+          </div>
+        </a>
+        <div class="creator-card-name">Pedro Alvarez</div>
+        <div class="creator-card-role">Engenheiro Mobile</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- COMUNIDADE -->
+  <section id="comunidade" class="even-section" style="background: var(--surface);">
+    <div class="section-label">Iniciativas</div>
+    <h2 class="section-title fade-in">Codando <span>Comunidade</span></h2>
+    <p class="section-desc fade-in">Projetos open source, ferramentas e iniciativas criadas para e pela comunidade dev.
+      <a href="https://github.com/CodandoTV" target="_blank"
+        style="color:var(--accent);text-decoration:none;font-weight:700;">Ver tudo no GitHub →</a></p>
+
+    <div class="stats-grid">
+      <div class="stat-card fade-in">
+        <div class="stat-num">⭐ 200+</div>
+        <div class="stat-label">Estrelas nos repositórios</div>
+      </div>
+      <div class="stat-card fade-in" style="transition-delay: 0.1s;">
+        <div class="stat-num" style="font-size:1.4rem;">Open Source</div>
+        <div class="stat-label">Aberto para a comunidade</div>
+      </div>
+      <div class="stat-card fade-in" style="transition-delay: 0.2s;">
+        <div class="stat-num">↓ 1K+</div>
+        <div class="stat-label">Downloads e em uso</div>
+      </div>
+      <div class="stat-card fade-in" style="transition-delay: 0.3s;">
+        <div class="stat-num">15</div>
+        <div class="stat-label">Contribuidores</div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="libs-wrapper">
+      <div class="libs-tabs" id="libsTabs">
+        <button class="libs-tab active" onclick="selectLib(0, this)">CraftD</button>
+        <button class="libs-tab" onclick="selectLib(1, this)">popcorn-guineapig</button>
+        <button class="libs-tab" onclick="selectLib(2, this)">eagle-eye</button>
+        <button class="libs-tab" onclick="selectLib(3, this)">jujubaSVG</button>
+        <button class="libs-tab" onclick="selectLib(4, this)">Netflix</button>
+      </div>
+
+      <div class="libs-content" id="libsContent">
+        <div class="libs-info">
+          <div class="libs-lang">
+            <span
+              style="width:10px;height:10px;border-radius:50%;background:#7C52FF;display:inline-block;margin-right:4px;"></span>Android
+            <span
+              style="width:10px;height:10px;border-radius:50%;background:#38b6ff;display:inline-block;margin:0 4px 0 12px;"></span>iOS
+            <span
+              style="width:10px;height:10px;border-radius:50%;background:#54C5F8;display:inline-block;margin:0 4px 0 12px;"></span>Flutter
+            <span
+              style="width:10px;height:10px;border-radius:50%;background:#B069FF;display:inline-block;margin:0 4px 0 12px;"></span>KMP
+          </div>
+          <div class="libs-title">CraftD</div>
+          <p class="libs-desc">Um framework para implementar Server-Driven UI de forma rápida e simples em Android, iOS,
+            Flutter e KMP. Permite que as interfaces sejam controladas pelo servidor, tornando as atualizações mais
+            ágeis e sem necessidade de publicar uma nova versão do app.</p>
+        </div>
+        <div class="libs-media" style="background:#0a0e14;padding:0;overflow:hidden;">
+          <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+            <source src="assets/images/libs/CraftD.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div class="videos-section-header fade-in" style="margin-top: 64px;">
+      <div>
+        <div class="section-label">Para começar</div>
+        <h2 class="section-title" style="font-size: 1.8rem;">Vídeos úteis para <span>começar</span></h2>
+      </div>
+    </div>
+
+    <div class="speeches-grid">
+      <div class="speech-card fade-in">
+        <div class="video-embed" style="border-radius:12px 12px 0 0;">
+          <iframe src="https://www.youtube.com/embed/Biqa9X2LDTo" title="Como entrar em TI" allowfullscreen
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+        <div class="speech-info">
+          <div class="speech-tags">
+            <span class="speech-tag tag-carreira">Carreira</span>
+          </div>
+          <div class="speech-title">Como Entrar em TI: Guia Completo de Carreiras</div>
+          <div class="speech-event">16 profissionais explicam cada área: Produto, Cloud, Mobile, IA, DevOps e muito
+            mais.</div>
+        </div>
+      </div>
+
+      <div class="speech-card fade-in" style="transition-delay: 0.1s;">
+        <div class="video-embed" style="border-radius:12px 12px 0 0;">
+          <iframe src="https://www.youtube.com/embed/syEhtDfAbBM" title="8 Estágios de Confiabilidade da IA"
+            allowfullscreen
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+        <div class="speech-info">
+          <div class="speech-tags">
+            <span class="speech-tag tag-ia">IA</span>
+          </div>
+          <div class="speech-title">8 Estágios de Confiabilidade da IA para Devs</div>
+          <div class="speech-event">Claude Code, Cursor, agentes e produtividade. Como a confiança no uso de IA evolui
+            na prática.</div>
+        </div>
+      </div>
+
+      <div class="speech-card fade-in" style="transition-delay: 0.2s;">
+        <div class="video-embed" style="border-radius:12px 12px 0 0;">
+          <iframe src="https://www.youtube.com/embed/Co-e1QPD73M" title="CraftD: Server Driven UI" allowfullscreen
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+        <div class="speech-info">
+          <div class="speech-tags">
+            <span class="speech-tag tag-android">Android</span>
+            <span class="speech-tag tag-flutter">Flutter</span>
+            <span class="speech-tag tag-ios">iOS</span>
+          </div>
+          <div class="speech-title">CraftD: Server Driven UI para Todas as Plataformas</div>
+          <div class="speech-event">Telas dinâmicas sem release. A solução open source da comunidade CodandoTV para SDUI
+            multiplataforma.</div>
+        </div>
+      </div>
+
+      <div class="speech-card fade-in" style="transition-delay: 0.3s;">
+        <div class="video-embed" style="border-radius:12px 12px 0 0;">
+          <iframe src="https://www.youtube.com/embed/O9g7RX6OrRI" title="Kotzilla no Compose Multiplatform"
+            allowfullscreen
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+        <div class="speech-info">
+          <div class="speech-tags">
+            <span class="speech-tag tag-obs">Observabilidade</span>
+          </div>
+          <div class="speech-title">Kotzilla no Compose Multiplatform: Setup Completo</div>
+          <div class="speech-event">Observabilidade gratuita para open source. Analise comportamento, performance e
+            issues do seu app KMP.</div>
+        </div>
+      </div>
+
+      <div class="speech-card fade-in" style="transition-delay: 0.4s;">
+        <div class="video-embed" style="border-radius:12px 12px 0 0;">
+          <iframe src="https://www.youtube.com/embed/uLNIxp5YZ9k" title="Mockito no Flutter" allowfullscreen
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+        <div class="speech-info">
+          <div class="speech-tags">
+            <span class="speech-tag tag-flutter">Flutter</span>
+          </div>
+          <div class="speech-title">Mockito no Flutter: Testes Unitários com Mocks</div>
+          <div class="speech-event">Como usar mocks para criar testes unitários mais confiáveis, rápidos e desacoplados
+            no ecossistema Flutter.</div>
+        </div>
+      </div>
+
+      <div class="speech-card fade-in" style="transition-delay: 0.5s;">
+        <div class="video-embed" style="border-radius:12px 12px 0 0;">
+          <iframe src="https://www.youtube.com/embed/Hf7DV8asMT8" title="O Que é Kotlin Multiplatform" allowfullscreen
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+        <div class="speech-info">
+          <div class="speech-tags">
+            <span class="speech-tag tag-kotlin">Kotlin</span>
+          </div>
+          <div class="speech-title">O Que é Kotlin Multiplatform em 10 Minutos</div>
+          <div class="speech-event">Compartilhe código entre Android, iOS e Web. Entenda como o KMP funciona e como
+            começar a usar nos seus projetos.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INICIATIVAS -->
+  <section id="iniciativas" class="odd-section">
+    <div class="section-label">Outras formas de se conectar</div>
+    <h2 class="section-title fade-in">Outras <span>Iniciativas</span></h2>
+    <p class="section-desc fade-in" style="margin-bottom: 0;">Além do YouTube, a comunidade vive em vários lugares.
+      Escolha o canal que faz mais sentido pra você.</p>
+    <div class="iniciativas-list">
+
+      <div class="iniciativa-card fade-in">
+        <div class="iniciativa-info">
+          <span class="iniciativa-tag">Comunidade</span>
+          <div class="iniciativa-name">WhatsApp & Discord</div>
+          <div class="iniciativa-desc" style="margin-bottom:14px;">Grupo ativo com devs, vagas, dicas e discussões
+            diárias sobre tech e carreira.</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a href="https://chat.whatsapp.com/BA3c4f1zJifCN9k1c4YaFj" target="_blank"
+              style="display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;font-size:0.72rem;font-weight:700;padding:6px 14px;border-radius:6px;text-decoration:none;white-space:nowrap;">Participe
+              no WhatsApp</a>
+            <a href="https://discord.gg/zhgzdeTp" target="_blank"
+              style="display:inline-flex;align-items:center;gap:6px;background:#5865F2;color:#fff;font-size:0.72rem;font-weight:700;padding:6px 14px;border-radius:6px;text-decoration:none;white-space:nowrap;">Participe
+              no Discord</a>
+          </div>
+        </div>
+        <div class="iniciativa-media">
+          <img src="assets/images/comunidade.png" alt="Comunidade" onerror="this.style.display='none'">
+        </div>
+      </div>
+
+      <div class="iniciativa-card fade-in" style="transition-delay: 0.1s;">
+        <div class="iniciativa-info">
+          <span class="iniciativa-tag">Artigos</span>
+          <div class="iniciativa-name">Medium</div>
+          <div class="iniciativa-desc" style="margin-bottom:14px;">Textos técnicos, opiniões e análises aprofundadas
+            sobre o mundo dev.</div>
+          <a href="https://medium.com/codandotv/all" target="_blank"
+            style="display:inline-flex;align-items:center;gap:6px;background:#fff;color:#000;font-size:0.72rem;font-weight:700;padding:6px 14px;border-radius:6px;text-decoration:none;white-space:nowrap;">Ler
+            no Medium</a>
+        </div>
+        <div class="iniciativa-media">
+          <img src="assets/images/artigos.png" alt="Artigos" onerror="this.style.display='none'">
+        </div>
+      </div>
+
+      <div class="iniciativa-card fade-in" style="transition-delay: 0.2s;">
+        <div class="iniciativa-info">
+          <span class="iniciativa-tag">Podcast</span>
+          <div class="iniciativa-name">Spotify</div>
+          <div class="iniciativa-desc">Episódios com convidados, histórias de carreira e papos sobre tecnologia.</div>
+        </div>
+        <div class="iniciativa-media" style="display:flex;">
+          <iframe style="border-radius:0 14px 14px 0;"
+            src="https://open.spotify.com/embed/episode/3gCgHlOGJS9ZAlWDUHZhVa?utm_source=generator&theme=0"
+            width="100%" height="100%" frameBorder="0" allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+
+      <div class="iniciativa-card fade-in" style="transition-delay: 0.3s;">
+        <div class="iniciativa-info">
+          <span class="iniciativa-tag">Curso</span>
+          <div class="iniciativa-name">Curso Kotlin Multiplatform</div>
+          <div class="iniciativa-desc" style="margin-bottom: 12px;">
+            Aprenda a compartilhar código entre Android e iOS usando Kotlin Multiplatform. Um curso prático, direto ao
+            ponto, feito para desenvolvedores que querem entrar no ecossistema KMP sem rodeios.
+          </div>
+          <div class="iniciativa-desc"
+            style="font-size: 0.78rem; border-left: 2px solid var(--accent); padding-left: 12px; margin-bottom: 16px;">
+            Este curso tem como foco principal o ecossistema KMP. Não é um curso introdutório de Kotlin como linguagem,
+            nem aprofunda arquitetura moderna ou Android nativo. A proposta é ajudar desenvolvedores a entenderem como
+            compartilhar código entre Android e iOS de forma prática e direta.
+          </div>
+          <a href="https://www.udemy.com/course/kotlin-multiplatform-domine-do-basico-ao-intermediario/" target="_blank"
+            style="display:inline-flex;align-items:center;gap:6px;background:var(--primary);color:#fff;font-size:0.78rem;font-weight:700;padding:8px 18px;border-radius:8px;text-decoration:none;">🎓
+            Quero conhecer o curso</a>
+        </div>
+        <div class="iniciativa-media" style="display:flex;">
+          <iframe style="width:100%;height:100%;border:none;border-radius:0 14px 14px 0;"
+            src="https://www.youtube.com/embed/2_dYJr1s5Ak" title="Curso KMP" allowfullscreen
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo"><span
+          style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #fff;">Codando</span><span
+          style="font-family: 'Outfit', sans-serif; font-weight: 900; color: var(--primary);">&lt;TV/&gt;</span></div>
+      <div class="footer-socials">
+        <a href="https://youtube.com/@codandotv" class="social-link" title="YouTube" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity:.7;">
+            <path
+              d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+          </svg>
+        </a>
+        <a href="https://chat.whatsapp.com/BA3c4f1zJifCN9k1c4YaFj" target="_blank" class="social-link" title="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity:.7;">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/rviannaoliveira/" target="_blank" class="social-link" title="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity:.7;">
+            <path
+              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+          </svg>
+        </a>
+        <a href="https://medium.com/codandotv/all" target="_blank" class="social-link" title="Medium">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity:.7;">
+            <path
+              d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
+          </svg>
+        </a>
+        <a href="https://github.com/CodandoTV" class="social-link" title="GitHub" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="opacity:.7;">
+            <path
+              d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+          </svg>
+        </a>
+      </div>
+      <a onclick="window.location.href='mai'+'lto:codando.tv@gmail.com'"
+        style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:8px;background:var(--accent);color:#080B10;font-weight:700;font-size:0.85rem;text-decoration:none;cursor:pointer;">Fale
+        conosco</a>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Rodrigo Vianna Calixto de Oliveira. Todos os direitos reservados.</p>
+    </div>
+  </footer>
 </body>
+
 </html>
