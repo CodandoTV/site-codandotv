@@ -1,10 +1,87 @@
 var data = [
-    { title: 'CraftD', desc: 'Um framework para implementar Server-Driven UI de forma rápida e simples em Android, iOS, Flutter e KMP. Permite que as interfaces sejam controladas pelo servidor, tornando as atualizações mais ágeis e sem necessidade de publicar uma nova versão do app.', netflix: false, dart: false, craftd: true, img: 'assets/images/libs/CraftD.mp4', video: true },
-    { title: 'popcorn-guineapig', desc: 'Um plugin leve para forçar regras de arquitetura em projetos multi-módulo. Garante que as fronteiras entre módulos sejam respeitadas sem esforço.', netflix: false, dart: false, craftd: false, img: 'assets/images/libs/popcorn-guineapig.png', video: false },
-    { title: 'eagle-eye', desc: 'Uma ferramenta CLI em Dart para enforçar regras de arquitetura em projetos Flutter/Dart. Mantém o código organizado e as dependências sob controle.', netflix: false, dart: true, craftd: false, img: 'assets/images/libs/eagle-eye.png', video: false },
-    { title: 'jujubaSVG', desc: 'Uma biblioteca para manipular arquivos SVG em apps Android e Flutter, criada pela CodandoTV para facilitar o uso de SVGs dinâmicos no mobile.', netflix: false, dart: false, craftd: false, img: 'assets/images/libs/jujubaSVG.png', video: false },
-    { title: 'Netflix', desc: 'StreamPlayerApp virou dois projetos de estudo para a comunidade, com exemplos de arquitetura moderna e boas práticas em Android nativo e Kotlin Multiplatform.', netflix: true, dart: false, craftd: false, img: 'assets/images/libs/Netflix.png', video: false }
+    {
+        title: 'CraftD',
+        support: ['Android', 'iOS', 'Flutter', 'CMP'],
+        desc: 'Um framework para implementar Server-Driven UI de forma rápida e simples em Android, iOS, Flutter e KMP. Permite que as interfaces sejam controladas pelo servidor, tornando as atualizações mais ágeis e sem necessidade de publicar uma nova versão do app.',
+        img: 'assets/images/libs/CraftD.mp4',
+        video: true,
+        netflix: false
+    },
+    {
+        title: 'popcorn-guineapig',
+        support: ['Gradle'],
+        desc: 'Um plugin leve para forçar regras de arquitetura em projetos multi-módulo. Garante que as fronteiras entre módulos sejam respeitadas sem esforço.',
+        img: 'assets/images/libs/popcorn-guineapig.png',
+        video: false,
+        netflix: false
+    },
+    {
+        title: 'eagle-eye',
+        support: ['Dart'],
+        desc: 'Uma ferramenta CLI em Dart para enforçar regras de arquitetura em projetos Flutter/Dart. Mantém o código organizado e as dependências sob controle.',
+        img: 'assets/images/libs/eagle-eye.png',
+        video: false,
+        netflix: false
+    },
+    {
+        title: 'jujubaSVG',
+        support: ['Android', 'Flutter'],
+        desc: 'Uma biblioteca para manipular arquivos SVG em apps Android e Flutter, criada pela CodandoTV para facilitar o uso de SVGs dinâmicos no mobile.',
+        img: 'assets/images/libs/jujubaSVG.png',
+        video: false,
+        netflix: false
+    },
+    {
+        title: 'Netflix',
+        support: ['Android', 'CMP'],
+        desc: 'StreamPlayerApp virou dois projetos de estudo para a comunidade, com exemplos de arquitetura moderna e boas práticas em Android nativo e Kotlin Multiplatform.',
+        img: 'assets/images/libs/Netflix.png',
+        video: false,
+        netflix: true
+    }
 ];
+
+function _langsSectionHtml(support) {
+    var langHtml = '';
+
+    for (var i = 0; i < support.length; i++) {
+        var margin = i === 0 ? '0 0 0 0' : '0 0 0 12px';
+        var lang = support[i];
+        var dotColor = '#38b6ff';
+        switch (lang) {
+            case 'Android':
+                dotColor = '#2b8c38';
+                break;
+            case 'iOS':
+                lang = 'iOS';
+                dotColor = '#ff9c38';
+                break;
+            case 'Flutter':
+                dotColor = '#38b6ff';
+                break;
+            case 'KMP':
+                dotColor = '#B069FF';
+                break;
+            case 'CMP':
+                dotColor = '#B069FF';
+                break;
+            case 'Gradle':
+                dotColor = '#ff3838';
+                break;
+            case 'Dart':
+                dotColor = '#38b6ff';
+                break;
+        }
+
+        langHtml += '<div class="libs-lang">' +
+            '<span style="width:10px;height:10px;border-radius:50%;background:' + dotColor + ';display:inline-block;margin:' + margin + '">' +
+            '</span>' +
+            lang +
+            '</div>';
+    }
+
+    return langHtml;
+}
 
 function selectLib(i, btn) {
     document.querySelectorAll('.libs-tab').forEach(function (t) { t.classList.remove('active'); });
@@ -12,14 +89,8 @@ function selectLib(i, btn) {
     var d = data[i];
     var lc = document.getElementById('libsContent');
     if (!lc) return;
-    var dotColor = d.dart ? '#00B4AB' : '#7C52FF';
-    var lang = d.dart ? 'Dart' : 'Kotlin';
-    var langHtml;
-    if (d.craftd) {
-        langHtml = '<div class="libs-lang"><span style="width:10px;height:10px;border-radius:50%;background:#7C52FF;display:inline-block;margin-right:4px;"></span>Android <span style="width:10px;height:10px;border-radius:50%;background:#38b6ff;display:inline-block;margin:0 4px 0 8px;"></span>iOS <span style="width:10px;height:10px;border-radius:50%;background:#54C5F8;display:inline-block;margin:0 4px 0 8px;"></span>Flutter <span style="width:10px;height:10px;border-radius:50%;background:#B069FF;display:inline-block;margin:0 4px 0 8px;"></span>KMP</div>';
-    } else {
-        langHtml = '<div class="libs-lang"><span style="width:10px;height:10px;border-radius:50%;background:' + dotColor + ';display:inline-block;margin-right:6px;"></span>' + lang + '</div>';
-    }
+    var langHtml = _langsSectionHtml(d.support);
+
     var titleHtml = d.netflix
         ? '<div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap;"><div style="flex:1;min-width:140px;background:#1a1f2a;border:1px solid rgba(56,182,255,.2);border-radius:10px;padding:14px;"><div style="font-size:1rem;font-weight:800;color:#F0F2F5;margin-bottom:4px;">Netflix-Android</div><div style="font-size:.72rem;color:#8A909C;">&#9733; 59</div></div><div style="flex:1;min-width:140px;background:#1a1f2a;border:1px solid rgba(56,182,255,.2);border-radius:10px;padding:14px;"><div style="font-size:1rem;font-weight:800;color:#F0F2F5;margin-bottom:4px;">Netflix-KMP</div><div style="font-size:.72rem;color:#8A909C;">&#9733; 27</div></div></div>'
         : '<div class="libs-title">' + d.title + '</div>';
