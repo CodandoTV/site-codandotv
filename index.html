@@ -10,6 +10,8 @@
     rel="stylesheet">
 
   <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/data/content_creators_data.js"></script>
+  <script src="assets/js/data/library_content_data.js"></script>
   <script src="assets/js/app.js"></script>
 
 </head>
@@ -130,48 +132,7 @@
       <div class="creator-role">Fundador · Engenheiro Mobile</div>
     </div>
 
-    <div class="creators-grid">
-      <div class="creator-card fade-in" style="transition-delay: 0.1s;">
-        <a href="https://www.linkedin.com/in/jrmartins/" target="_blank" style="text-decoration:none;">
-          <div class="creator-avatar-sm">
-            <img src="assets/images/junior.jpg" alt="Junior Martins" style="width:100%;height:100%;object-fit:cover;"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="avatar-placeholder"
-              style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">JM
-            </div>
-          </div>
-        </a>
-        <div class="creator-card-name">Junior Martins</div>
-        <div class="creator-card-role">Engenheiro Mobile</div>
-      </div>
-      <div class="creator-card fade-in" style="transition-delay: 0.2s;">
-        <a href="https://www.linkedin.com/in/gabrielbronzattimoro15031994/" target="_blank"
-          style="text-decoration:none;">
-          <div class="creator-avatar-sm">
-            <img src="assets/images/moro.jpg" alt="Gabriel Moro" style="width:100%;height:100%;object-fit:cover;"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="avatar-placeholder"
-              style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">GM
-            </div>
-          </div>
-        </a>
-        <div class="creator-card-name">Gabriel Moro</div>
-        <div class="creator-card-role">Engenheiro Mobile</div>
-      </div>
-      <div class="creator-card fade-in" style="transition-delay: 0.3s;">
-        <a href="https://www.linkedin.com/in/pedro-alvarez94/" target="_blank" style="text-decoration:none;">
-          <div class="creator-avatar-sm">
-            <img src="assets/images/pedro.jpg" alt="Pedro Alvarez" style="width:100%;height:100%;object-fit:cover;"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="avatar-placeholder"
-              style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">PA
-            </div>
-          </div>
-        </a>
-        <div class="creator-card-name">Pedro Alvarez</div>
-        <div class="creator-card-role">Engenheiro Mobile</div>
-      </div>
-    </div>
+    <div class="creators-grid" id="codandotv_creators"></div>
   </section>
 
   <div class="divider"></div>
@@ -207,36 +168,14 @@
 
     <div class="libs-wrapper">
       <div class="libs-tabs" id="libsTabs">
-        <button class="libs-tab active" onclick="selectLib(0, this)">CraftD</button>
-        <button class="libs-tab" onclick="selectLib(1, this)">popcorn-guineapig</button>
-        <button class="libs-tab" onclick="selectLib(2, this)">eagle-eye</button>
-        <button class="libs-tab" onclick="selectLib(3, this)">jujubaSVG</button>
-        <button class="libs-tab" onclick="selectLib(4, this)">Netflix</button>
+        <button class="libs-tab active" onclick="onLibsContentRender(0, this)">CraftD</button>
+        <button class="libs-tab" onclick="onLibsContentRender(1, this)">popcorn-guineapig</button>
+        <button class="libs-tab" onclick="onLibsContentRender(2, this)">eagle-eye</button>
+        <button class="libs-tab" onclick="onLibsContentRender(3, this)">jujubaSVG</button>
+        <button class="libs-tab" onclick="onLibsContentRender(4, this)">Netflix</button>
       </div>
 
-      <div class="libs-content" id="libsContent">
-        <div class="libs-info">
-          <div class="libs-lang">
-            <span
-              style="width:10px;height:10px;border-radius:50%;background:#2b8c38;display:inline-block;margin-right:4px;"></span>Android
-            <span
-              style="width:10px;height:10px;border-radius:50%;background:#ff9c38;display:inline-block;margin:0 4px 0 12px;"></span>iOS
-            <span
-              style="width:10px;height:10px;border-radius:50%;background:#38b6ff;display:inline-block;margin:0 4px 0 12px;"></span>Flutter
-            <span
-              style="width:10px;height:10px;border-radius:50%;background:#B069FF;display:inline-block;margin:0 4px 0 12px;"></span>CMP
-          </div>
-          <div class="libs-title">CraftD</div>
-          <p class="libs-desc">Um framework para implementar Server-Driven UI de forma rápida e simples em Android, iOS,
-            Flutter e KMP. Permite que as interfaces sejam controladas pelo servidor, tornando as atualizações mais
-            ágeis e sem necessidade de publicar uma nova versão do app.</p>
-        </div>
-        <div class="libs-media" style="background:#0a0e14;padding:0;overflow:hidden;">
-          <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
-            <source src="assets/images/libs/CraftD.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
+      <div class="libs-content" id="libsContent"></div>
     </div>
 
     <div class="videos-section-header fade-in" style="margin-top: 64px;">

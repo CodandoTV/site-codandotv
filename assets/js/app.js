@@ -1,46 +1,3 @@
-var data = [
-    {
-        title: 'CraftD',
-        support: ['Android', 'iOS', 'Flutter', 'CMP'],
-        desc: 'Um framework para implementar Server-Driven UI de forma rápida e simples em Android, iOS, Flutter e KMP. Permite que as interfaces sejam controladas pelo servidor, tornando as atualizações mais ágeis e sem necessidade de publicar uma nova versão do app.',
-        img: 'assets/images/libs/CraftD.mp4',
-        video: true,
-        netflix: false
-    },
-    {
-        title: 'popcorn-guineapig',
-        support: ['Gradle'],
-        desc: 'Um plugin leve para forçar regras de arquitetura em projetos multi-módulo. Garante que as fronteiras entre módulos sejam respeitadas sem esforço.',
-        img: 'assets/images/libs/popcorn-guineapig.png',
-        video: false,
-        netflix: false
-    },
-    {
-        title: 'eagle-eye',
-        support: ['Dart'],
-        desc: 'Uma ferramenta CLI em Dart para enforçar regras de arquitetura em projetos Flutter/Dart. Mantém o código organizado e as dependências sob controle.',
-        img: 'assets/images/libs/eagle-eye.png',
-        video: false,
-        netflix: false
-    },
-    {
-        title: 'jujubaSVG',
-        support: ['Android', 'Flutter'],
-        desc: 'Uma biblioteca para manipular arquivos SVG em apps Android e Flutter, criada pela CodandoTV para facilitar o uso de SVGs dinâmicos no mobile.',
-        img: 'assets/images/libs/jujubaSVG.png',
-        video: false,
-        netflix: false
-    },
-    {
-        title: 'Netflix',
-        support: ['Android', 'CMP'],
-        desc: 'StreamPlayerApp virou dois projetos de estudo para a comunidade, com exemplos de arquitetura moderna e boas práticas em Android nativo e Kotlin Multiplatform.',
-        img: 'assets/images/libs/Netflix.png',
-        video: false,
-        netflix: true
-    }
-];
-
 function _langsSectionHtml(support) {
     var langHtml = '';
 
@@ -83,10 +40,31 @@ function _langsSectionHtml(support) {
     return langHtml;
 }
 
-function selectLib(i, btn) {
+function _onLoadContentCreators() {
+    var cc = document.getElementById('codandotv_creators');
+    if (!cc) return;
+
+    contentCreatorsData.forEach(function (c, i) {
+        var cardHtml = '<div class="creator-card fade-in" style="transition-delay: ' + ((i + 1) * 0.1) + 's;">' +
+            '<a href="' + c.linkedin + '" target="_blank" style="text-decoration:none;">' +
+            '<div class="creator-avatar-sm">' +
+            '<img src="' + c.image + '" alt="' + c.name + '" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">' +
+            '<div class="avatar-placeholder" style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">' +
+            c.name.split(' ').map(n => n[0]).join('') +
+            '</div>' +
+            '</div>' +
+            '</a>' +
+            '<div class="creator-card-name">' + c.name + '</div>' +
+            '<div class="creator-card-role">' + c.role + '</div>' +
+            '</div>';
+        cc.innerHTML += cardHtml;
+    });
+}
+
+function onLibsContentRender(i, btn) {
     document.querySelectorAll('.libs-tab').forEach(function (t) { t.classList.remove('active'); });
     btn.classList.add('active');
-    var d = data[i];
+    var d = libraryContentData[i];
     var lc = document.getElementById('libsContent');
     if (!lc) return;
     var langHtml = _langsSectionHtml(d.support);
@@ -108,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(function (el) { obs.observe(el); });
-
+    
     // Autoplay vídeo "Conheça o Canal" ao entrar na viewport
     var canalVideo = document.getElementById('canal-video');
     if (canalVideo) {
@@ -123,4 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { threshold: 0.5 });
         videoObs.observe(canalVideo);
     }
+
+    onLibsContentRender(0,document.querySelector('.libs-tab.active'));
+    _onLoadContentCreators();
 });
