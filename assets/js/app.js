@@ -40,7 +40,7 @@ function _langsSectionHtml(support) {
     return langHtml;
 }
 
-function selectLib(i, btn) {
+function onLibsContentRender(i, btn) {
     document.querySelectorAll('.libs-tab').forEach(function (t) { t.classList.remove('active'); });
     btn.classList.add('active');
     var d = libraryContentData[i];
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(function (el) { obs.observe(el); });
-
+    
     // Autoplay vídeo "Conheça o Canal" ao entrar na viewport
     var canalVideo = document.getElementById('canal-video');
     if (canalVideo) {
@@ -80,4 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { threshold: 0.5 });
         videoObs.observe(canalVideo);
     }
+
+    onLibsContentRender(0,document.querySelector('.libs-tab.active'));
 });
