@@ -40,6 +40,27 @@ function _langsSectionHtml(support) {
     return langHtml;
 }
 
+function _onLoadContentCreators() {
+    var cc = document.getElementById('codandotv_creators');
+    if (!cc) return;
+
+    contentCreatorsData.forEach(function (c, i) {
+        var cardHtml = '<div class="creator-card fade-in" style="transition-delay: ' + ((i + 1) * 0.1) + 's;">' +
+            '<a href="' + c.linkedin + '" target="_blank" style="text-decoration:none;">' +
+            '<div class="creator-avatar-sm">' +
+            '<img src="' + c.image + '" alt="' + c.name + '" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">' +
+            '<div class="avatar-placeholder" style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">' +
+            c.name.split(' ').map(n => n[0]).join('') +
+            '</div>' +
+            '</div>' +
+            '</a>' +
+            '<div class="creator-card-name">' + c.name + '</div>' +
+            '<div class="creator-card-role">' + c.role + '</div>' +
+            '</div>';
+        cc.innerHTML += cardHtml;
+    });
+}
+
 function onLibsContentRender(i, btn) {
     document.querySelectorAll('.libs-tab').forEach(function (t) { t.classList.remove('active'); });
     btn.classList.add('active');
@@ -82,4 +103,5 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     onLibsContentRender(0,document.querySelector('.libs-tab.active'));
+    _onLoadContentCreators();
 });
