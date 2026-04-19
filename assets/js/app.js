@@ -109,7 +109,21 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("home_initiatives_youtube_title").textContent = generalData["home.initiatives.youtube_title"];
     document.getElementById("home_initiatives_youtube_header_part1").textContent = generalData["home.initiatives.youtube_header_part1"];
     document.getElementById("home_initiatives_youtube_header_part2").textContent = generalData["home.initiatives.youtube_header_part2"];
-
+    document.getElementById("home_initiatives_contact_title").textContent = generalData["home.initiatives.contact_title"];
+    document.getElementById("home_initiatives_contact_header_part1").textContent = generalData["home.initiatives.contact_header_part1"];
+    document.getElementById("home_initiatives_contact_header_part2").textContent = generalData["home.initiatives.contact_header_part2"];
+    document.getElementById("home_initiatives_contact_description").textContent = generalData["home.initiatives.contact_description"];
+    document.getElementById("home_initiatives_contact_community").textContent = generalData["home.initiatives.contact_community"];
+    document.getElementById("home_initiatives_contact_community_description").textContent = generalData["home.initiatives.contact_community_description"];
+    document.getElementById("home_initiatives_contact_articles").textContent = generalData["home.initiatives.contact_articles"];
+    document.getElementById("home_initiatives_contact_articles_description").textContent = generalData["home.initiatives.contact_articles_description"];
+    document.getElementById("home_initiatives_contact_podcast").textContent = generalData["home.initiatives.contact_podcast"];
+    document.getElementById("home_initiatives_contact_podcast_description").textContent = generalData["home.initiatives.contact_podcast_description"];
+    document.getElementById("home_initiatives_contact_course").textContent = generalData["home.initiatives.contact_course"];
+    document.getElementById("home_initiatives_contact_course_header").textContent = generalData["home.initiatives.contact_course_header"];
+    document.getElementById("home_initiatives_contact_course_description").textContent = generalData["home.initiatives.contact_course_description"];
+    document.getElementById("home_initiatives_contact_course_quote").textContent = generalData["home.initiatives.contact_course_quote"];
+    
     document.querySelectorAll('.fade-in').forEach(function (el) { el.classList.add('hidden'); });
     var obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
