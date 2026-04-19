@@ -80,6 +80,20 @@ function onLibsContentRender(i, btn) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    const generalData = fetchGeneralData();
+    document.getElementById("home_topbar_home").textContent = generalData["home.topbar.home"];
+    document.getElementById("home_topbar_codandocreators").textContent = generalData["home.topbar.codandocreators"];
+    document.getElementById("home_topbar_community").textContent = generalData["home.topbar.community"];
+    document.getElementById("home_topbar_initiatives").textContent = generalData["home.topbar.initiatives"];
+    document.getElementById("home_welcome_title").textContent = generalData["home.welcome.title"];
+    document.getElementById("home_welcome_description").textContent = generalData["home.welcome.description"];
+    document.getElementById("home_community_title").textContent = generalData["home.community.title"];
+    document.getElementById("home_community_description_part1").textContent = generalData["home.community.description_part1"];
+    document.getElementById("home_community_description_part2").textContent = generalData["home.community.description_part2"];
+    document.getElementById("home_community_description_part3").textContent = generalData["home.community.description_part3"];
+    document.getElementById("home_community_header_part1").textContent = generalData["home.community.header_part1"];
+    document.getElementById("home_community_header_part2").textContent = generalData["home.community.header_part2"];
+
     document.querySelectorAll('.fade-in').forEach(function (el) { el.classList.add('hidden'); });
     var obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {

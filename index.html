@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="assets/js/data/content_creators_data.js"></script>
   <script src="assets/js/data/library_content_data.js"></script>
+  <script src="assets/js/data/general_data.js"></script>
   <script src="assets/js/app.js"></script>
 
 </head>
@@ -24,10 +25,10 @@
         style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #fff;">Codando</span><span
         style="font-family: 'Outfit', sans-serif; font-weight: 900; color: var(--primary);">&lt;TV/&gt;</span></a>
     <ul class="nav-links">
-      <li><a href="#canal">Conheça o Canal</a></li>
-      <li><a href="#creators">CodandoCreators</a></li>
-      <li><a href="#comunidade">Comunidade</a></li>
-      <li><a href="#iniciativas">Iniciativas</a></li>
+      <li><a href="#canal" id="home_topbar_home">Conheça o Canal</a></li>
+      <li><a href="#creators" id="home_topbar_codandocreators">CodandoCreators</a></li>
+      <li><a href="#comunidade" id="home_topbar_community">Comunidade</a></li>
+      <li><a href="#iniciativas" id="home_topbar_initiatives">Iniciativas</a></li>
     </ul>
   </nav>
 
@@ -38,14 +39,14 @@
     <div class="hero-grid"></div>
     <div class="hero-glow"></div>
 
-    <div class="hero-badge">Conteúdo e projetos para a comunidade</div>
+    <div class="hero-badge" id="home_welcome_title">Conteúdo e projetos para a comunidade</div>
 
     <h1 class="hero-title fade-in">
       <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #fff;">Codando</span><span
         style="font-family: 'Outfit', sans-serif; font-weight: 900; color: var(--primary);">&lt;TV/&gt;</span>
     </h1>
 
-    <p class="hero-sub fade-in" style="transition-delay: 0.1s;">
+    <p id="home_welcome_description" class="hero-sub fade-in" style="transition-delay: 0.1s;">
       É um espaço para aprender, compartilhar conhecimento e construir projetos com a comunidade através de conteúdo
       técnico, vídeos de opinião, podcasts, mentorias e open source.
     </p>
@@ -84,18 +85,18 @@
   <section id="canal" class="even-section">
     <div class="canal-inner">
       <div class="fade-in">
-        <div class="section-label">Sobre o canal</div>
-        <h2 class="section-title">Conheça o <span>Canal</span></h2>
-        <p class="section-desc" style="margin-bottom: 20px;">
+        <div class="section-label" id="home_community_title">Sobre o canal</div>
+        <h2 class="section-title"><p id="home_community_header_part1">Conheça o </p><span id="home_community_header_part2">Canal</span></h2>
+        <p id="home_community_description_part1" class="section-desc" style="margin-bottom: 20px;">
           O CodandoTV nasceu como um espaço aberto para aprender, compartilhar conhecimento e criar junto com a
           comunidade. Nunca foi só sobre programação. A ideia sempre foi também trocar experiências sobre tecnologia,
           carreira e a vivência real de quem trabalha na área.
         </p>
-        <p class="section-desc" style="margin-bottom: 20px;">
+        <p id="home_community_description_part2" class="section-desc" style="margin-bottom: 20px;">
           Aqui você vai encontrar conteúdo técnico, vídeos de opinião, reacts, podcasts com convidados e mentorias. O
           canal cresce junto com a comunidade, acompanhando assuntos que geram valor, conversa e aprendizado de verdade.
         </p>
-        <p class="section-desc">
+        <p id="home_community_description_part3" class="section-desc">
           Além disso, o CodandoTV também tem projetos open source no GitHub, criados para que mais pessoas possam usar,
           estudar e contribuir. O objetivo é construir coisas úteis para a comunidade de forma aberta e colaborativa.
         </p>
