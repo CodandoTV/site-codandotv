@@ -106,6 +106,9 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("home_initiatives_open_source_description").textContent = generalData["home.initiatives.open_source_description"];
     document.getElementById("home_initiatives_downloads_description").textContent = generalData["home.initiatives.downloads_description"];
     document.getElementById("home_initiatives_contributors_description").textContent = generalData["home.initiatives.contributors_description"];
+    document.getElementById("home_initiatives_youtube_title").textContent = generalData["home.initiatives.youtube_title"];
+    document.getElementById("home_initiatives_youtube_header_part1").textContent = generalData["home.initiatives.youtube_header_part1"];
+    document.getElementById("home_initiatives_youtube_header_part2").textContent = generalData["home.initiatives.youtube_header_part2"];
 
     document.querySelectorAll('.fade-in').forEach(function (el) { el.classList.add('hidden'); });
     var obs = new IntersectionObserver(function (entries) {
