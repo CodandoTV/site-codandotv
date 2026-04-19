@@ -95,6 +95,9 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("home_community_description_part3").textContent = generalData["home.community.description_part3"];
     document.getElementById("home_community_header_part1").textContent = generalData["home.community.header_part1"];
     document.getElementById("home_community_header_part2").textContent = generalData["home.community.header_part2"];
+    document.getElementById("home_codandocreators_title").textContent = generalData["home.codandocreators.title"];
+    document.getElementById("home_codandocreators_description").textContent = generalData["home.codandocreators.description"];
+    document.getElementById("home_codandocreators_rods_description").textContent = generalData["home.codandocreators.rods.description"];
 
     document.querySelectorAll('.fade-in').forEach(function (el) { el.classList.add('hidden'); });
     var obs = new IntersectionObserver(function (entries) {
