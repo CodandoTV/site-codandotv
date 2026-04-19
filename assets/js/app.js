@@ -98,6 +98,14 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("home_codandocreators_title").textContent = generalData["home.codandocreators.title"];
     document.getElementById("home_codandocreators_description").textContent = generalData["home.codandocreators.description"];
     document.getElementById("home_codandocreators_rods_description").textContent = generalData["home.codandocreators.rods.description"];
+    document.getElementById("home_initiatives_title").textContent = generalData["home.initiatives.title"];
+    document.getElementById("home_initiatives_header_part2").textContent = generalData["home.initiatives.header_part2"];
+    document.getElementById("home_initiatives_description").textContent = generalData["home.initiatives.description"];
+    document.getElementById("home_initiatives_see_on_github").textContent = generalData["home.initiatives.see_on_github"];
+    document.getElementById("home_initiatives_stars_description").textContent = generalData["home.initiatives.stars_description"];
+    document.getElementById("home_initiatives_open_source_description").textContent = generalData["home.initiatives.open_source_description"];
+    document.getElementById("home_initiatives_downloads_description").textContent = generalData["home.initiatives.downloads_description"];
+    document.getElementById("home_initiatives_contributors_description").textContent = generalData["home.initiatives.contributors_description"];
 
     document.querySelectorAll('.fade-in').forEach(function (el) { el.classList.add('hidden'); });
     var obs = new IntersectionObserver(function (entries) {
