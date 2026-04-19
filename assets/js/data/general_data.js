@@ -44,6 +44,7 @@ const generalData_ptBR = {
     "home.initiatives.contact_course_header": "Curso Kotlin Multiplatform",
     "home.initiatives.contact_course_description": "Aprenda a compartilhar código entre Android e iOS usando Kotlin Multiplatform. Um curso prático, direto ao ponto, feito para desenvolvedores que querem entrar no ecossistema KMP sem rodeios.",
     "home.initiatives.contact_course_quote": "Este curso tem como foco principal o ecossistema KMP. Não é um curso introdutório de Kotlin como linguagem, nem aprofunda arquitetura moderna ou Android nativo. A proposta é ajudar desenvolvedores a entenderem como compartilhar código entre Android e iOS de forma prática e direta.",
+    "home.get_in_touch.title": "Fale conosco",
     "home.copyright": "© 2025 Rodrigo Vianna Calixto de Oliveira. Todos os direitos reservados."
 };
 
@@ -93,6 +94,7 @@ const generalData_enUs = {
     "home.initiatives.contact_course_header": "Kotlin Multiplatform Course",
     "home.initiatives.contact_course_description": "Learn how to share code between Android and iOS using Kotlin Multiplatform. A practical, straight-to-the-point course designed for developers who want to enter the KMP ecosystem without unnecessary complexity.",
     "home.initiatives.contact_course_quote": "This course focuses primarily on the KMP ecosystem. It is not an introductory Kotlin language course, nor does it dive deep into modern architecture or native Android. The goal is to help developers understand how to share code between Android and iOS in a practical and straightforward way.",
+    "home.get_in_touch.title": "Get in touch",
     "home.copyright": "© 2025 Rodrigo Vianna Calixto de Oliveira. All rights reserved."
 };
 

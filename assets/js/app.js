@@ -125,6 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("home_initiatives_contact_course_header").textContent = generalData["home.initiatives.contact_course_header"];
     document.getElementById("home_initiatives_contact_course_description").textContent = generalData["home.initiatives.contact_course_description"];
     document.getElementById("home_initiatives_contact_course_quote").textContent = generalData["home.initiatives.contact_course_quote"];
+    document.getElementById("home_get_in_touch_title").textContent = generalData["home.get_in_touch.title"];
 
     document.querySelectorAll('.fade-in').forEach(function (el) { el.classList.add('hidden'); });
     var obs = new IntersectionObserver(function (entries) {
