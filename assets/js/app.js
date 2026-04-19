@@ -106,6 +106,8 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("home_initiatives_contact_course_description").textContent = generalData["home.initiatives.contact_course_description"];
     document.getElementById("home_initiatives_contact_course_quote").textContent = generalData["home.initiatives.contact_course_quote"];
     document.getElementById("home_get_in_touch_title").textContent = generalData["home.get_in_touch.title"];
+    document.getElementById("home_join_on_whatsapp").textContent = generalData["home.join_whatsapp"];
+    document.getElementById("home_join_on_discord").textContent = generalData["home.join_discord"];
 
     document.querySelectorAll('.fade-in').forEach(function (el) { el.classList.add('hidden'); });
     var obs = new IntersectionObserver(function (entries) {
