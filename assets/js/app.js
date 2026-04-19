@@ -87,6 +87,8 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("home_topbar_initiatives").textContent = generalData["home.topbar.initiatives"];
     document.getElementById("home_welcome_title").textContent = generalData["home.welcome.title"];
     document.getElementById("home_welcome_description").textContent = generalData["home.welcome.description"];
+    document.getElementById("home_welcome_youtube_title").textContent = generalData["home.welcome.youtube_title"];
+    document.getElementById("home.welcome.youtube_subtitle").textContent = generalData["home.welcome.youtube_subtitle"];
     document.getElementById("home_community_title").textContent = generalData["home.community.title"];
     document.getElementById("home_community_description_part1").textContent = generalData["home.community.description_part1"];
     document.getElementById("home_community_description_part2").textContent = generalData["home.community.description_part2"];

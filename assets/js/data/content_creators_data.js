@@ -41,11 +41,9 @@ const contentCreatorsData_enUs = [
 ]
 
 function fetchContentCreatorsData() {
-    const isEnglish = navigator.language.startsWith('en');
-
-    if (isEnglish) {
-        return contentCreatorsData_enUs;
-    } else {
+    if(isPtBR()) {
         return contentCreatorsData_ptBR;
+    } else {
+        return contentCreatorsData_enUs;
     }
 };

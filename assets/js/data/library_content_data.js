@@ -85,11 +85,9 @@ const libraryContentData_enUs = [
 ];
 
 function fetchLibraryContentData() {
-    const isEnglish = navigator.language.startsWith('en');
-
-    if (isEnglish) {
-        return libraryContentData_enUs;
-    } else {
+    if(isPtBR()) {
         return libraryContentData_ptBR;
+    } else {
+        return libraryContentData_enUs;
     }
 };

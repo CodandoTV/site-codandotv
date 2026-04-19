@@ -1,6 +1,8 @@
 const generalData_ptBR = {
     "home.welcome.title": "Conteúdo e projetos para a comunidade",
     "home.welcome.description": "É um espaço para aprender, compartilhar conhecimento e construir projetos com a comunidade através de conteúdo técnico, vídeos de opinião, podcasts, mentorias e open source.",
+    "home.welcome.youtube_title": "Conheça nosso Canal do YouTube",
+    "home.welcome.youtube_subtitle": "Inscreva-se no canal",
     "home.topbar.home": "Conheça o Canal",
     "home.topbar.codandocreators": "CodandoCreators",
     "home.topbar.community": "Comunidade",
@@ -46,6 +48,8 @@ const generalData_ptBR = {
 const generalData_enUs = {
     "home.welcome.title": "Content and projects for the community",
     "home.welcome.description": "A space to learn, share knowledge, and build projects with the community through technical content, opinion videos, podcasts, mentorships, and open source.",
+    "home.welcome.youtube_title": "To get started",
+    "home.welcome.youtube_subtitle": "Subscribe to the channel.",
     "home.topbar.home": "Explore the Channel",
     "home.topbar.codandocreators": "CodandoCreators",
     "home.topbar.community": "Community",
@@ -89,11 +93,9 @@ const generalData_enUs = {
 };
 
 function fetchGeneralData() {
-    const isEnglish = navigator.language.startsWith('en');
-
-    if (isEnglish) {
-        return generalData_enUs;
-    } else {
+    if (isPtBR()) {
         return generalData_ptBR;
+    } else {
+        return generalData_enUs;
     }
 };
