@@ -44,7 +44,7 @@ function _onLoadContentCreators() {
     var cc = document.getElementById('codandotv_creators');
     if (!cc) return;
 
-    contentCreatorsData.forEach(function (c, i) {
+    fetchContentCreatorsData().forEach(function (c, i) {
         var cardHtml = '<div class="creator-card fade-in" style="transition-delay: ' + ((i + 1) * 0.1) + 's;">' +
             '<a href="' + c.linkedin + '" target="_blank" style="text-decoration:none;">' +
             '<div class="creator-avatar-sm">' +
@@ -64,7 +64,8 @@ function _onLoadContentCreators() {
 function onLibsContentRender(i, btn) {
     document.querySelectorAll('.libs-tab').forEach(function (t) { t.classList.remove('active'); });
     btn.classList.add('active');
-    var d = libraryContentData[i];
+    const data = fetchLibraryContentData();
+    var d = data[i];
     var lc = document.getElementById('libsContent');
     if (!lc) return;
     var langHtml = _langsSectionHtml(d.support);
@@ -86,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(function (el) { obs.observe(el); });
-    
+
     // Autoplay vídeo "Conheça o Canal" ao entrar na viewport
     var canalVideo = document.getElementById('canal-video');
     if (canalVideo) {
@@ -102,6 +103,6 @@ document.addEventListener('DOMContentLoaded', function () {
         videoObs.observe(canalVideo);
     }
 
-    onLibsContentRender(0,document.querySelector('.libs-tab.active'));
+    onLibsContentRender(0, document.querySelector('.libs-tab.active'));
     _onLoadContentCreators();
 });
