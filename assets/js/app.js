@@ -1,44 +1,4 @@
-function _langsSectionHtml(support) {
-    var langHtml = '';
 
-    for (var i = 0; i < support.length; i++) {
-        var margin = i === 0 ? '0 0 0 0' : '0 0 0 12px';
-        var lang = support[i];
-        var dotColor = '#38b6ff';
-        switch (lang) {
-            case 'Android':
-                dotColor = '#2b8c38';
-                break;
-            case 'iOS':
-                lang = 'iOS';
-                dotColor = '#ff9c38';
-                break;
-            case 'Flutter':
-                dotColor = '#38b6ff';
-                break;
-            case 'KMP':
-                dotColor = '#B069FF';
-                break;
-            case 'CMP':
-                dotColor = '#B069FF';
-                break;
-            case 'Gradle':
-                dotColor = '#ff3838';
-                break;
-            case 'Dart':
-                dotColor = '#38b6ff';
-                break;
-        }
-
-        langHtml += '<div class="libs-lang">' +
-            '<span style="width:10px;height:10px;border-radius:50%;background:' + dotColor + ';display:inline-block;margin:' + margin + '">' +
-            '</span>' +
-            lang +
-            '</div>';
-    }
-
-    return langHtml;
-}
 
 function _onLoadContentCreators() {
     var cc = document.getElementById('codandotv_creators');
@@ -61,6 +21,26 @@ function _onLoadContentCreators() {
     });
 }
 
+function _onLoadSpeechContent() {
+    var sc = document.getElementById('speeches-content');
+    if (!sc) return;
+
+    fetchSpeechContentData().forEach(function (s, i) {
+        var cardHtml = '<div class="speech-card fade-in" style="transition-delay: ' + ((i + 1) * 0.1) + 's;">' +
+            '<div class="video-embed" style="border-radius:12px 12px 0 0;">' +
+            '<iframe src="' + s.youtubeUrl + '" title="' + s.youtubeTitle + '" allowfullscreen ' +
+            'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>' +
+            '</div>' +
+            '<div class="speech-info">' +
+            getSpeechTags(s.youtubeCategories) +
+            '<div class="speech-title">' + s.youtubeTitle + '</div>' +
+            '<div class="speech-event">' + s.youtubeDescription + '</div>' +
+            '</div>' +
+            '</div>';
+        sc.innerHTML += cardHtml;
+    });
+}
+
 function onLibsContentRender(i, btn) {
     document.querySelectorAll('.libs-tab').forEach(function (t) { t.classList.remove('active'); });
     btn.classList.add('active');
@@ -68,7 +48,7 @@ function onLibsContentRender(i, btn) {
     var d = data[i];
     var lc = document.getElementById('libsContent');
     if (!lc) return;
-    var langHtml = _langsSectionHtml(d.support);
+    var langHtml = langsSectionHtml(d.support);
 
     var titleHtml = d.netflix
         ? '<div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap;"><div style="flex:1;min-width:140px;background:#1a1f2a;border:1px solid rgba(56,182,255,.2);border-radius:10px;padding:14px;"><div style="font-size:1rem;font-weight:800;color:#F0F2F5;margin-bottom:4px;">Netflix-Android</div><div style="font-size:.72rem;color:#8A909C;">&#9733; 59</div></div><div style="flex:1;min-width:140px;background:#1a1f2a;border:1px solid rgba(56,182,255,.2);border-radius:10px;padding:14px;"><div style="font-size:1rem;font-weight:800;color:#F0F2F5;margin-bottom:4px;">Netflix-KMP</div><div style="font-size:.72rem;color:#8A909C;">&#9733; 27</div></div></div>'
@@ -152,4 +132,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
     onLibsContentRender(0, document.querySelector('.libs-tab.active'));
     _onLoadContentCreators();
+    _onLoadSpeechContent();
 });

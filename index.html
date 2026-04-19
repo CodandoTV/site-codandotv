@@ -13,7 +13,10 @@
   <script src="assets/js/data/content_creators_data.js"></script>
   <script src="assets/js/data/library_content_data.js"></script>
   <script src="assets/js/data/general_data.js"></script>
-  <script src="assets/js/translation_check.js"></script>
+  <script src="assets/js/data/speech_content_data.js"></script>
+  <script src="assets/js/util/translation_check.js"></script>
+  <script src="assets/js/util/speech_tags_handler.js"></script>
+  <script src="assets/js/util/langs_section_handler.js"></script>
   <script src="assets/js/app.js"></script>
 
 </head>
@@ -194,101 +197,7 @@
       </div>
     </div>
 
-    <div class="speeches-grid">
-      <div class="speech-card fade-in">
-        <div class="video-embed" style="border-radius:12px 12px 0 0;">
-          <iframe src="https://www.youtube.com/embed/Biqa9X2LDTo" title="Como entrar em TI" allowfullscreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        </div>
-        <div class="speech-info">
-          <div class="speech-tags">
-            <span class="speech-tag tag-carreira">Carreira</span>
-          </div>
-          <div class="speech-title">Como Entrar em TI: Guia Completo de Carreiras</div>
-          <div class="speech-event">16 profissionais explicam cada área: Produto, Cloud, Mobile, IA, DevOps e muito
-            mais.</div>
-        </div>
-      </div>
-
-      <div class="speech-card fade-in" style="transition-delay: 0.1s;">
-        <div class="video-embed" style="border-radius:12px 12px 0 0;">
-          <iframe src="https://www.youtube.com/embed/syEhtDfAbBM" title="8 Estágios de Confiabilidade da IA"
-            allowfullscreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        </div>
-        <div class="speech-info">
-          <div class="speech-tags">
-            <span class="speech-tag tag-ia">IA</span>
-          </div>
-          <div class="speech-title">8 Estágios de Confiabilidade da IA para Devs</div>
-          <div class="speech-event">Claude Code, Cursor, agentes e produtividade. Como a confiança no uso de IA evolui
-            na prática.</div>
-        </div>
-      </div>
-
-      <div class="speech-card fade-in" style="transition-delay: 0.2s;">
-        <div class="video-embed" style="border-radius:12px 12px 0 0;">
-          <iframe src="https://www.youtube.com/embed/Co-e1QPD73M" title="CraftD: Server Driven UI" allowfullscreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        </div>
-        <div class="speech-info">
-          <div class="speech-tags">
-            <span class="speech-tag tag-android">Android</span>
-            <span class="speech-tag tag-flutter">Flutter</span>
-            <span class="speech-tag tag-ios">iOS</span>
-          </div>
-          <div class="speech-title">CraftD: Server Driven UI para Todas as Plataformas</div>
-          <div class="speech-event">Telas dinâmicas sem release. A solução open source da comunidade CodandoTV para SDUI
-            multiplataforma.</div>
-        </div>
-      </div>
-
-      <div class="speech-card fade-in" style="transition-delay: 0.3s;">
-        <div class="video-embed" style="border-radius:12px 12px 0 0;">
-          <iframe src="https://www.youtube.com/embed/O9g7RX6OrRI" title="Kotzilla no Compose Multiplatform"
-            allowfullscreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        </div>
-        <div class="speech-info">
-          <div class="speech-tags">
-            <span class="speech-tag tag-obs">Observabilidade</span>
-          </div>
-          <div class="speech-title">Kotzilla no Compose Multiplatform: Setup Completo</div>
-          <div class="speech-event">Observabilidade gratuita para open source. Analise comportamento, performance e
-            issues do seu app KMP.</div>
-        </div>
-      </div>
-
-      <div class="speech-card fade-in" style="transition-delay: 0.4s;">
-        <div class="video-embed" style="border-radius:12px 12px 0 0;">
-          <iframe src="https://www.youtube.com/embed/uLNIxp5YZ9k" title="Mockito no Flutter" allowfullscreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        </div>
-        <div class="speech-info">
-          <div class="speech-tags">
-            <span class="speech-tag tag-flutter">Flutter</span>
-          </div>
-          <div class="speech-title">Mockito no Flutter: Testes Unitários com Mocks</div>
-          <div class="speech-event">Como usar mocks para criar testes unitários mais confiáveis, rápidos e desacoplados
-            no ecossistema Flutter.</div>
-        </div>
-      </div>
-
-      <div class="speech-card fade-in" style="transition-delay: 0.5s;">
-        <div class="video-embed" style="border-radius:12px 12px 0 0;">
-          <iframe src="https://www.youtube.com/embed/Hf7DV8asMT8" title="O Que é Kotlin Multiplatform" allowfullscreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        </div>
-        <div class="speech-info">
-          <div class="speech-tags">
-            <span class="speech-tag tag-kotlin">Kotlin</span>
-          </div>
-          <div class="speech-title">O Que é Kotlin Multiplatform em 10 Minutos</div>
-          <div class="speech-event">Compartilhe código entre Android, iOS e Web. Entenda como o KMP funciona e como
-            começar a usar nos seus projetos.</div>
-        </div>
-      </div>
-    </div>
+    <div id="speeches-content" class="speeches-grid"></div>
   </section>
 
   <!-- INICIATIVAS -->
@@ -369,7 +278,8 @@
             nem aprofunda arquitetura moderna ou Android nativo. A proposta é ajudar desenvolvedores a entenderem como
             compartilhar código entre Android e iOS de forma prática e direta.
           </div>
-          <a id="home_initiatives_contact_course_read_more" href="https://www.udemy.com/course/kotlin-multiplatform-domine-do-basico-ao-intermediario/" target="_blank"
+          <a id="home_initiatives_contact_course_read_more"
+            href="https://www.udemy.com/course/kotlin-multiplatform-domine-do-basico-ao-intermediario/" target="_blank"
             style="display:inline-flex;align-items:center;gap:6px;background:var(--primary);color:#fff;font-size:0.78rem;font-weight:700;padding:8px 18px;border-radius:8px;text-decoration:none;">🎓
             Quero conhecer o curso</a>
         </div>
