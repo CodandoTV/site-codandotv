@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("home_initiatives_contact_community").textContent = generalData["home.initiatives.contact_community"];
     document.getElementById("home_initiatives_contact_community_description").textContent = generalData["home.initiatives.contact_community_description"];
     document.getElementById("home_initiatives_contact_articles").textContent = generalData["home.initiatives.contact_articles"];
+    document.getElementById("home_initiatives_contact_articles_read_more").textContent = generalData["home.initiatives.contacts_articles_read_more"];
     document.getElementById("home_initiatives_contact_articles_description").textContent = generalData["home.initiatives.contact_articles_description"];
     document.getElementById("home_initiatives_contact_podcast").textContent = generalData["home.initiatives.contact_podcast"];
     document.getElementById("home_initiatives_contact_podcast_description").textContent = generalData["home.initiatives.contact_podcast_description"];
@@ -123,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("home_initiatives_contact_course_header").textContent = generalData["home.initiatives.contact_course_header"];
     document.getElementById("home_initiatives_contact_course_description").textContent = generalData["home.initiatives.contact_course_description"];
     document.getElementById("home_initiatives_contact_course_quote").textContent = generalData["home.initiatives.contact_course_quote"];
-    
+
     document.querySelectorAll('.fade-in').forEach(function (el) { el.classList.add('hidden'); });
     var obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
