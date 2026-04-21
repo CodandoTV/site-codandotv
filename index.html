@@ -12,6 +12,11 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="assets/js/data/content_creators_data.js"></script>
   <script src="assets/js/data/library_content_data.js"></script>
+  <script src="assets/js/data/general_data.js"></script>
+  <script src="assets/js/data/speech_content_data.js"></script>
+  <script src="assets/js/util/translation_check.js"></script>
+  <script src="assets/js/util/speech_tags_handler.js"></script>
+  <script src="assets/js/util/langs_section_handler.js"></script>
   <script src="assets/js/app.js"></script>
 
 </head>
@@ -24,10 +29,10 @@
         style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #fff;">Codando</span><span
         style="font-family: 'Outfit', sans-serif; font-weight: 900; color: var(--primary);">&lt;TV/&gt;</span></a>
     <ul class="nav-links">
-      <li><a href="#canal">Conheça o Canal</a></li>
-      <li><a href="#creators">CodandoCreators</a></li>
-      <li><a href="#comunidade">Comunidade</a></li>
-      <li><a href="#iniciativas">Iniciativas</a></li>
+      <li><a href="#canal" id="home_topbar_home">Conheça o Canal</a></li>
+      <li><a href="#creators" id="home_topbar_codandocreators">CodandoCreators</a></li>
+      <li><a href="#comunidade" id="home_topbar_community">Comunidade</a></li>
+      <li><a href="#iniciativas" id="home_topbar_initiatives">Iniciativas</a></li>
     </ul>
   </nav>
 
@@ -38,14 +43,14 @@
     <div class="hero-grid"></div>
     <div class="hero-glow"></div>
 
-    <div class="hero-badge">Conteúdo e projetos para a comunidade</div>
+    <div class="hero-badge" id="home_welcome_title">Conteúdo e projetos para a comunidade</div>
 
     <h1 class="hero-title fade-in">
       <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #fff;">Codando</span><span
         style="font-family: 'Outfit', sans-serif; font-weight: 900; color: var(--primary);">&lt;TV/&gt;</span>
     </h1>
 
-    <p class="hero-sub fade-in" style="transition-delay: 0.1s;">
+    <p id="home_welcome_description" class="hero-sub fade-in" style="transition-delay: 0.1s;">
       É um espaço para aprender, compartilhar conhecimento e construir projetos com a comunidade através de conteúdo
       técnico, vídeos de opinião, podcasts, mentorias e open source.
     </p>
@@ -69,8 +74,8 @@
       style="transition-delay: 0.3s;">
       <span class="yt-icon">▶</span>
       <span class="yt-text">
-        <span class="yt-label">Conheça nosso canal no YouTube</span>
-        <span class="yt-sub">Inscreva-se no canal</span>
+        <span class="yt-label" id="home_welcome_youtube_title">Conheça nosso canal no YouTube</span>
+        <span class="yt-sub" id="home.welcome.youtube_subtitle">Inscreva-se no canal</span>
       </span>
     </a>
 
@@ -84,18 +89,20 @@
   <section id="canal" class="even-section">
     <div class="canal-inner">
       <div class="fade-in">
-        <div class="section-label">Sobre o canal</div>
-        <h2 class="section-title">Conheça o <span>Canal</span></h2>
-        <p class="section-desc" style="margin-bottom: 20px;">
+        <div class="section-label" id="home_community_title">Sobre o canal</div>
+        <h2 class="section-title">
+          <p id="home_community_header_part1">Conheça o </p><span id="home_community_header_part2">Canal</span>
+        </h2>
+        <p id="home_community_description_part1" class="section-desc" style="margin-bottom: 20px;">
           O CodandoTV nasceu como um espaço aberto para aprender, compartilhar conhecimento e criar junto com a
           comunidade. Nunca foi só sobre programação. A ideia sempre foi também trocar experiências sobre tecnologia,
           carreira e a vivência real de quem trabalha na área.
         </p>
-        <p class="section-desc" style="margin-bottom: 20px;">
+        <p id="home_community_description_part2" class="section-desc" style="margin-bottom: 20px;">
           Aqui você vai encontrar conteúdo técnico, vídeos de opinião, reacts, podcasts com convidados e mentorias. O
           canal cresce junto com a comunidade, acompanhando assuntos que geram valor, conversa e aprendizado de verdade.
         </p>
-        <p class="section-desc">
+        <p id="home_community_description_part3" class="section-desc">
           Além disso, o CodandoTV também tem projetos open source no GitHub, criados para que mais pessoas possam usar,
           estudar e contribuir. O objetivo é construir coisas úteis para a comunidade de forma aberta e colaborativa.
         </p>
@@ -111,9 +118,9 @@
 
   <!-- CREATORS -->
   <section id="creators" class="odd-section">
-    <div class="section-label">Quem faz acontecer</div>
+    <div class="section-label" id="home_codandocreators_title">Quem faz acontecer</div>
     <h2 class="section-title">Codando<span>Creators</span></h2>
-    <p class="section-desc" style="margin: 0 auto 60px; text-align: center;">
+    <p id="home_codandocreators_description" class="section-desc" style="margin: 0 auto 60px; text-align: center;">
       Conheça as pessoas por trás dos conteúdos e iniciativas do CodandoTV.
     </p>
 
@@ -129,7 +136,7 @@
       </a>
       <div class="creator-name">Rodrigo Vianna <span
           style="color:var(--muted);font-weight:400;font-size:1rem;">(Rods)</span></div>
-      <div class="creator-role">Fundador · Engenheiro Mobile</div>
+      <div class="creator-role" id="home_codandocreators_rods_description">Fundador · Engenheiro Mobile</div>
     </div>
 
     <div class="creators-grid" id="codandotv_creators"></div>
@@ -139,28 +146,30 @@
 
   <!-- COMUNIDADE -->
   <section id="comunidade" class="even-section" style="background: var(--surface);">
-    <div class="section-label">Iniciativas</div>
-    <h2 class="section-title fade-in">Codando <span>Comunidade</span></h2>
-    <p class="section-desc fade-in">Projetos open source, ferramentas e iniciativas criadas para e pela comunidade dev.
-      <a href="https://github.com/CodandoTV" target="_blank"
-        style="color:var(--accent);text-decoration:none;font-weight:700;">Ver tudo no GitHub →</a></p>
+    <div class="section-label" id="home_initiatives_title">Iniciativas</div>
+    <h2 class="section-title fade-in">Codando <span id="home_initiatives_header_part2">Comunidade</span></h2>
+    <p class="section-desc fade-in">
+    <p id="home_initiatives_description">Projetos open source, ferramentas e iniciativas criadas para e pela comunidade
+      dev.</p>
+    <a href="https://github.com/CodandoTV" target="_blank" id="home_initiatives_see_on_github"
+      style="color:var(--accent);text-decoration:none;font-weight:700;">Ver tudo no GitHub →</a></p>
 
     <div class="stats-grid">
       <div class="stat-card fade-in">
         <div class="stat-num">⭐ 220+</div>
-        <div class="stat-label">Estrelas nos repositórios</div>
+        <div id="home_initiatives_stars_description" class="stat-label">Estrelas nos repositórios</div>
       </div>
       <div class="stat-card fade-in" style="transition-delay: 0.1s;">
         <div class="stat-num" style="font-size:1.4rem;">Open Source</div>
-        <div class="stat-label">Aberto para a comunidade</div>
+        <div class="stat-label" id="home_initiatives_open_source_description">Aberto para a comunidade</div>
       </div>
       <div class="stat-card fade-in" style="transition-delay: 0.2s;">
         <div class="stat-num">↑ 7K+</div>
-        <div class="stat-label">Downloads e em uso</div>
+        <div id="home_initiatives_downloads_description" class="stat-label">Downloads e em uso</div>
       </div>
       <div class="stat-card fade-in" style="transition-delay: 0.3s;">
         <div class="stat-num">17</div>
-        <div class="stat-label">Contribuidores</div>
+        <div id="home_initiatives_contributors_description" class="stat-label">Contribuidores</div>
       </div>
     </div>
     </div>
@@ -180,127 +189,41 @@
 
     <div class="videos-section-header fade-in" style="margin-top: 64px;">
       <div>
-        <div class="section-label">Para começar</div>
-        <h2 class="section-title" style="font-size: 1.8rem;">Vídeos úteis para <span>começar</span></h2>
+        <div id="home_initiatives_youtube_title" class="section-label">Para começar</div>
+        <h2 class="section-title" style="font-size: 1.8rem;">
+          <p id="home_initiatives_youtube_header_part1">Vídeos úteis para </p><span
+            id="home_initiatives_youtube_header_part2">começar</span>
+        </h2>
       </div>
     </div>
 
-    <div class="speeches-grid">
-      <div class="speech-card fade-in">
-        <div class="video-embed" style="border-radius:12px 12px 0 0;">
-          <iframe src="https://www.youtube.com/embed/Biqa9X2LDTo" title="Como entrar em TI" allowfullscreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        </div>
-        <div class="speech-info">
-          <div class="speech-tags">
-            <span class="speech-tag tag-carreira">Carreira</span>
-          </div>
-          <div class="speech-title">Como Entrar em TI: Guia Completo de Carreiras</div>
-          <div class="speech-event">16 profissionais explicam cada área: Produto, Cloud, Mobile, IA, DevOps e muito
-            mais.</div>
-        </div>
-      </div>
-
-      <div class="speech-card fade-in" style="transition-delay: 0.1s;">
-        <div class="video-embed" style="border-radius:12px 12px 0 0;">
-          <iframe src="https://www.youtube.com/embed/syEhtDfAbBM" title="8 Estágios de Confiabilidade da IA"
-            allowfullscreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        </div>
-        <div class="speech-info">
-          <div class="speech-tags">
-            <span class="speech-tag tag-ia">IA</span>
-          </div>
-          <div class="speech-title">8 Estágios de Confiabilidade da IA para Devs</div>
-          <div class="speech-event">Claude Code, Cursor, agentes e produtividade. Como a confiança no uso de IA evolui
-            na prática.</div>
-        </div>
-      </div>
-
-      <div class="speech-card fade-in" style="transition-delay: 0.2s;">
-        <div class="video-embed" style="border-radius:12px 12px 0 0;">
-          <iframe src="https://www.youtube.com/embed/Co-e1QPD73M" title="CraftD: Server Driven UI" allowfullscreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        </div>
-        <div class="speech-info">
-          <div class="speech-tags">
-            <span class="speech-tag tag-android">Android</span>
-            <span class="speech-tag tag-flutter">Flutter</span>
-            <span class="speech-tag tag-ios">iOS</span>
-          </div>
-          <div class="speech-title">CraftD: Server Driven UI para Todas as Plataformas</div>
-          <div class="speech-event">Telas dinâmicas sem release. A solução open source da comunidade CodandoTV para SDUI
-            multiplataforma.</div>
-        </div>
-      </div>
-
-      <div class="speech-card fade-in" style="transition-delay: 0.3s;">
-        <div class="video-embed" style="border-radius:12px 12px 0 0;">
-          <iframe src="https://www.youtube.com/embed/O9g7RX6OrRI" title="Kotzilla no Compose Multiplatform"
-            allowfullscreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        </div>
-        <div class="speech-info">
-          <div class="speech-tags">
-            <span class="speech-tag tag-obs">Observabilidade</span>
-          </div>
-          <div class="speech-title">Kotzilla no Compose Multiplatform: Setup Completo</div>
-          <div class="speech-event">Observabilidade gratuita para open source. Analise comportamento, performance e
-            issues do seu app KMP.</div>
-        </div>
-      </div>
-
-      <div class="speech-card fade-in" style="transition-delay: 0.4s;">
-        <div class="video-embed" style="border-radius:12px 12px 0 0;">
-          <iframe src="https://www.youtube.com/embed/uLNIxp5YZ9k" title="Mockito no Flutter" allowfullscreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        </div>
-        <div class="speech-info">
-          <div class="speech-tags">
-            <span class="speech-tag tag-flutter">Flutter</span>
-          </div>
-          <div class="speech-title">Mockito no Flutter: Testes Unitários com Mocks</div>
-          <div class="speech-event">Como usar mocks para criar testes unitários mais confiáveis, rápidos e desacoplados
-            no ecossistema Flutter.</div>
-        </div>
-      </div>
-
-      <div class="speech-card fade-in" style="transition-delay: 0.5s;">
-        <div class="video-embed" style="border-radius:12px 12px 0 0;">
-          <iframe src="https://www.youtube.com/embed/Hf7DV8asMT8" title="O Que é Kotlin Multiplatform" allowfullscreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        </div>
-        <div class="speech-info">
-          <div class="speech-tags">
-            <span class="speech-tag tag-kotlin">Kotlin</span>
-          </div>
-          <div class="speech-title">O Que é Kotlin Multiplatform em 10 Minutos</div>
-          <div class="speech-event">Compartilhe código entre Android, iOS e Web. Entenda como o KMP funciona e como
-            começar a usar nos seus projetos.</div>
-        </div>
-      </div>
-    </div>
+    <div id="speeches-content" class="speeches-grid"></div>
   </section>
 
   <!-- INICIATIVAS -->
   <section id="iniciativas" class="odd-section">
-    <div class="section-label">Outras formas de se conectar</div>
-    <h2 class="section-title fade-in">Outras <span>Iniciativas</span></h2>
-    <p class="section-desc fade-in" style="margin-bottom: 0;">Além do YouTube, a comunidade vive em vários lugares.
+    <div id="home_initiatives_contact_title" class="section-label">Outras formas de se conectar</div>
+    <h2 class="section-title fade-in">
+      <p id="home_initiatives_contact_header_part1">Outras </p><span
+        id="home_initiatives_contact_header_part2">Iniciativas</span>
+    </h2>
+    <p id="home_initiatives_contact_description" class="section-desc fade-in" style="margin-bottom: 0;">Além do YouTube,
+      a comunidade vive em vários lugares.
       Escolha o canal que faz mais sentido pra você.</p>
     <div class="iniciativas-list">
 
       <div class="iniciativa-card fade-in">
         <div class="iniciativa-info">
-          <span class="iniciativa-tag">Comunidade</span>
+          <span id="home_initiatives_contact_community" class="iniciativa-tag">Comunidade</span>
           <div class="iniciativa-name">WhatsApp & Discord</div>
-          <div class="iniciativa-desc" style="margin-bottom:14px;">Grupo ativo com devs, vagas, dicas e discussões
+          <div id="home_initiatives_contact_community_description" class="iniciativa-desc" style="margin-bottom:14px;">
+            Grupo ativo com devs, vagas, dicas e discussões
             diárias sobre tech e carreira.</div>
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            <a href="https://chat.whatsapp.com/BA3c4f1zJifCN9k1c4YaFj" target="_blank"
+            <a id="home_join_on_whatsapp" href="https://chat.whatsapp.com/BA3c4f1zJifCN9k1c4YaFj" target="_blank"
               style="display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;font-size:0.72rem;font-weight:700;padding:6px 14px;border-radius:6px;text-decoration:none;white-space:nowrap;">Participe
               no WhatsApp</a>
-            <a href="https://discord.gg/zhgzdeTp" target="_blank"
+            <a id="home_join_on_discord" href="https://discord.gg/zhgzdeTp" target="_blank"
               style="display:inline-flex;align-items:center;gap:6px;background:#5865F2;color:#fff;font-size:0.72rem;font-weight:700;padding:6px 14px;border-radius:6px;text-decoration:none;white-space:nowrap;">Participe
               no Discord</a>
           </div>
@@ -312,11 +235,12 @@
 
       <div class="iniciativa-card fade-in" style="transition-delay: 0.1s;">
         <div class="iniciativa-info">
-          <span class="iniciativa-tag">Artigos</span>
+          <span id="home_initiatives_contact_articles" class="iniciativa-tag">Artigos</span>
           <div class="iniciativa-name">Medium</div>
-          <div class="iniciativa-desc" style="margin-bottom:14px;">Textos técnicos, opiniões e análises aprofundadas
+          <div id="home_initiatives_contact_articles_description" class="iniciativa-desc" style="margin-bottom:14px;">
+            Textos técnicos, opiniões e análises aprofundadas
             sobre o mundo dev.</div>
-          <a href="https://medium.com/codandotv/all" target="_blank"
+          <a id="home_initiatives_contact_articles_read_more" href="https://medium.com/codandotv/all" target="_blank"
             style="display:inline-flex;align-items:center;gap:6px;background:#fff;color:#000;font-size:0.72rem;font-weight:700;padding:6px 14px;border-radius:6px;text-decoration:none;white-space:nowrap;">Ler
             no Medium</a>
         </div>
@@ -327,9 +251,10 @@
 
       <div class="iniciativa-card fade-in" style="transition-delay: 0.2s;">
         <div class="iniciativa-info">
-          <span class="iniciativa-tag">Podcast</span>
+          <span id="home_initiatives_contact_podcast" class="iniciativa-tag">Podcast</span>
           <div class="iniciativa-name">Spotify</div>
-          <div class="iniciativa-desc">Episódios com convidados, histórias de carreira e papos sobre tecnologia.</div>
+          <div id="home_initiatives_contact_podcast_description" class="iniciativa-desc">Episódios com convidados,
+            histórias de carreira e papos sobre tecnologia.</div>
         </div>
         <div class="iniciativa-media" style="display:flex;">
           <iframe style="border-radius:0 14px 14px 0;"
@@ -341,19 +266,20 @@
 
       <div class="iniciativa-card fade-in" style="transition-delay: 0.3s;">
         <div class="iniciativa-info">
-          <span class="iniciativa-tag">Curso</span>
-          <div class="iniciativa-name">Curso Kotlin Multiplatform</div>
-          <div class="iniciativa-desc" style="margin-bottom: 12px;">
+          <span id="home_initiatives_contact_course" class="iniciativa-tag">Curso</span>
+          <div id="home_initiatives_contact_course_header" class="iniciativa-name">Curso Kotlin Multiplatform</div>
+          <div id="home_initiatives_contact_course_description" class="iniciativa-desc" style="margin-bottom: 12px;">
             Aprenda a compartilhar código entre Android e iOS usando Kotlin Multiplatform. Um curso prático, direto ao
             ponto, feito para desenvolvedores que querem entrar no ecossistema KMP sem rodeios.
           </div>
-          <div class="iniciativa-desc"
+          <div id="home_initiatives_contact_course_quote" class="iniciativa-desc"
             style="font-size: 0.78rem; border-left: 2px solid var(--accent); padding-left: 12px; margin-bottom: 16px;">
             Este curso tem como foco principal o ecossistema KMP. Não é um curso introdutório de Kotlin como linguagem,
             nem aprofunda arquitetura moderna ou Android nativo. A proposta é ajudar desenvolvedores a entenderem como
             compartilhar código entre Android e iOS de forma prática e direta.
           </div>
-          <a href="https://www.udemy.com/course/kotlin-multiplatform-domine-do-basico-ao-intermediario/" target="_blank"
+          <a id="home_initiatives_contact_course_read_more"
+            href="https://www.udemy.com/course/kotlin-multiplatform-domine-do-basico-ao-intermediario/" target="_blank"
             style="display:inline-flex;align-items:center;gap:6px;background:var(--primary);color:#fff;font-size:0.78rem;font-weight:700;padding:8px 18px;border-radius:8px;text-decoration:none;">🎓
             Quero conhecer o curso</a>
         </div>
@@ -406,12 +332,12 @@
           </svg>
         </a>
       </div>
-      <a onclick="window.location.href='mai'+'lto:codando.tv@gmail.com'"
+      <a id="home_get_in_touch_title" onclick="window.location.href='mai'+'lto:codando.tv@gmail.com'"
         style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:8px;background:var(--accent);color:#080B10;font-weight:700;font-size:0.85rem;text-decoration:none;cursor:pointer;">Fale
         conosco</a>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">© 2025 Rodrigo Vianna Calixto de Oliveira. Todos os direitos reservados.</p>
+      <p id="home_copyright" class="footer-copy">© 2025 Rodrigo Vianna Calixto de Oliveira. Todos os direitos reservados.</p>
     </div>
   </footer>
 </body>
