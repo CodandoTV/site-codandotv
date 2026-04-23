@@ -1,5 +1,15 @@
 # CodandoTV — Skill do Projeto
 
+## Convenções de nomenclatura
+
+- Módulos de dados: sufixo `_data.js`, exportam função `fetchXxx()`
+- Módulos utilitários: pasta `util/`, exportam funções helper
+- Chaves de texto: dot notation — `"section.key.detail"`
+- IDs em HTML: snake_case — `section_key_detail` (equivale à chave com `.` → `_`)
+- Idiomas: underscore — `general_data_en_US.js` (não hífen)
+
+---
+
 ## Arquivos principais
 - Site: `index.html` — HTML com placeholders de IDs para conteúdo dinâmico
 - Estilos: `assets/css/style.css` — Design system com CSS custom properties
@@ -549,3 +559,22 @@ Ao adicionar features (novos vídeos, creators, libs, etc):
 - [ ] Analytics (Plausible, Fathom, etc)
 - [ ] Formulário de contato com envio de email
 - [ ] Hospedar no GitHub + Vercel/Netlify ou GitHub Pages
+
+---
+
+## Performance & Hosting
+
+- **Sem frameworks externos** — carregamento instantâneo com JS mínimo
+- **Cloudflare DNS** — CNAME aponta para GitHub Pages; scripts injetados no body podem quebrar funções globais (manter scripts no `<head>`)
+- **Autoplay de vídeos** — atributos `autoplay muted loop playsinline` para suporte mobile
+- **Imagens não têm lazy-load** — contagem pequena, iframes carregam sob demanda
+
+---
+
+## Contexto da última refatoração (PR #5 — i18n)
+
+- Todo texto estático movido para `general_data.js`; HTML contém apenas placeholders com `id`
+- Creators, libs e speeches agora são dados estruturados, renderizados dinamicamente por `app.js`
+- Adicionados `langs_section_handler.js` e `speech_tags_handler.js` como utilitários de renderização
+- `app.js` popula todo conteúdo no `DOMContentLoaded`, reduzindo o HTML em ~1300 linhas
+- Nenhuma breaking change — comportamento do site estático preservado
