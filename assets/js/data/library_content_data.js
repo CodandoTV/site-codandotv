@@ -10,7 +10,7 @@ const libraryContentData_ptBR = [
     {
         title: 'Popcorn Guineapig',
         support: ['Gradle', 'Detekt'],
-        desc: 'Um plugin leve para forçar regras de arquitetura em projetos multi-módulo. Garante que as fronteiras entre módulos sejam respeitadas sem esforço.',
+        desc: 'O Popcorn Gradle Plugin (PopcornGP) valida dependências entre módulos em projetos multi-módulo, enquanto a Popcorn Guineapig Detekt Rule realiza a validação a nível de código-fonte (import). Ambas as ferramentas oferecem um modelo de configuração flexível, permitindo definir e aplicar regras de arquitetura de acordo com as necessidades específicas do seu projeto.',
         img: 'assets/images/libs/popcorn-guineapig.png',
         video: false,
         multirepo: [
@@ -59,7 +59,7 @@ const libraryContentData_enUs = [
     {
         title: 'Popcorn Guineapig',
         support: ['Gradle', 'Detekt'],
-        desc: 'A lightweight plugin to enforce architecture rules in multi-module projects. It ensures that boundaries between modules are respected effortlessly.',
+        desc: 'The Popcorn Gradle Plugin (PopcornGP) validates dependencies between modules in multi-module projects, while the Popcorn Guineapig Detekt Rule performs validation at the source-code level by analyzing imports. Both tools provide a flexible configuration model, allowing you to define and enforce architectural rules tailored to your project\'s specific needs.',
         img: 'assets/images/libs/popcorn-guineapig.png',
         video: false,
         multirepo: [
