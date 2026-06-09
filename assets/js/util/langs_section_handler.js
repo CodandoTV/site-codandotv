@@ -28,6 +28,9 @@ function langsSectionHtml(support) {
             case 'Dart':
                 dotColor = '#38b6ff';
                 break;
+            case 'Detekt':
+                dotColor = '#fff238';
+                break;
         }
 
         langHtml += '<div class="libs-lang">' +
