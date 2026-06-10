@@ -50,9 +50,26 @@ function onLibsContentRender(i, btn) {
     if (!lc) return;
     var langHtml = langsSectionHtml(d.support);
 
-    var titleHtml = d.netflix
-        ? '<div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap;"><div style="flex:1;min-width:140px;background:#1a1f2a;border:1px solid rgba(56,182,255,.2);border-radius:10px;padding:14px;"><div style="font-size:1rem;font-weight:800;color:#F0F2F5;margin-bottom:4px;">Netflix-Android</div><div style="font-size:.72rem;color:#8A909C;">&#9733; 59</div></div><div style="flex:1;min-width:140px;background:#1a1f2a;border:1px solid rgba(56,182,255,.2);border-radius:10px;padding:14px;"><div style="font-size:1rem;font-weight:800;color:#F0F2F5;margin-bottom:4px;">Netflix-KMP</div><div style="font-size:.72rem;color:#8A909C;">&#9733; 27</div></div></div>'
-        : '<div class="libs-title">' + d.title + '</div>';
+    var titleHtml = d.multirepo.length > 0
+        ? `
+<div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap;">
+    ${d.multirepo
+            .map(
+                repo => `
+                <div style="flex:1;min-width:140px;background:#1a1f2a;border:1px solid rgba(56,182,255,.2);border-radius:10px;padding:14px;">
+                    <div style="font-size:1rem;font-weight:800;color:#F0F2F5;margin-bottom:4px;">
+                        ${repo.name}
+                    </div>
+                    <div style="font-size:.72rem;color:#8A909C;">
+                        &#9733; ${repo.stars}
+                    </div>
+                </div>
+            `
+            )
+            .join("")}
+</div>
+        ` : '<div class="libs-title">' + d.title + '</div>';
+
     var mediaHtml = d.video
         ? '<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;border-radius:10px;"><source src="' + d.img + '" type="video/mp4"></video>'
         : '<img src="' + d.img + '" alt="' + d.title + '" style="width:100%;height:100%;object-fit:cover;border-radius:10px;" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div style="display:none;align-items:center;justify-content:center;width:100%;height:100%;color:var(--muted);font-size:0.72rem;font-family:var(--font-mono);letter-spacing:.06em;">print / demo em breve</div>';
@@ -109,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("home_join_on_whatsapp").textContent = generalData["home.join_whatsapp"];
     document.getElementById("home_join_on_discord").textContent = generalData["home.join_discord"];
     document.getElementById("home_copyright").textContent = generalData["home.copyright"];
-    
+
     document.querySelectorAll('.fade-in').forEach(function (el) { el.classList.add('hidden'); });
     var obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
