@@ -28,8 +28,8 @@ const libraryContentData_ptBR = [
     },
     {
         title: 'jujubaSVG',
-        support: ['Android', 'Flutter'],
-        desc: 'Uma biblioteca para manipular arquivos SVG em apps Android e Flutter, criada pela CodandoTV para facilitar o uso de SVGs dinâmicos no mobile.',
+        support: ['Android', 'Flutter', 'CMP'],
+        desc: 'Uma biblioteca para manipular arquivos SVG em apps Compose Multiplatform, Android e Flutter, criada pela CodandoTV para facilitar o uso de SVGs dinâmicos no mobile.',
         img: 'assets/images/libs/jujubaSVG.png',
         video: false,
         multirepo: []
@@ -77,8 +77,8 @@ const libraryContentData_enUs = [
     },
     {
         title: 'jujubaSVG',
-        support: ['Android', 'Flutter'],
-        desc: 'A library to manipulate SVG files in Android and Flutter apps, created by CodandoTV to facilitate the use of dynamic SVGs in mobile.',
+        support: ['Android', 'Flutter', 'CMP'],
+        desc: 'A library to manipulate SVG files in Android, Flutter, and CMP apps, created by CodandoTV to facilitate the use of dynamic SVGs in mobile.',
         img: 'assets/images/libs/jujubaSVG.png',
         video: false,
         multirepo: []
