@@ -1,5 +1,47 @@
 
 
+function fetchGitHubStars() {
+    return fetch('https://api.github.com/orgs/CodandoTV/repos')
+        .then(function (res) {
+            if (!res.ok) return null;
+            return res.json();
+        })
+        .then(function (repos) {
+            if (!repos || !Array.isArray(repos)) return null;
+            var map = {};
+            repos.forEach(function (r) { map[r.name] = r.stargazers_count; });
+            return map;
+        })
+        .catch(function () { return null; });
+}
+
+function _applyGitHubStars(starMap) {
+    if (!starMap) return;
+
+    var total = 0;
+    Object.values(starMap).forEach(function (v) { total += v; });
+
+    var statEl = document.querySelector('.stat-num');
+    if (statEl) statEl.textContent = '⭐ ' + total + '+';
+
+    [libraryContentData_ptBR, libraryContentData_enUs].forEach(function (dataArr) {
+        dataArr.forEach(function (lib) {
+            lib.multirepo.forEach(function (repo) {
+                if (starMap[repo.name] !== undefined) {
+                    repo.stars = String(starMap[repo.name]);
+                }
+            });
+        });
+    });
+
+    var activeBtn = document.querySelector('.libs-tab.active');
+    if (activeBtn) {
+        var tabs = Array.from(document.querySelectorAll('.libs-tab'));
+        var idx = tabs.indexOf(activeBtn);
+        if (idx >= 0) onLibsContentRender(idx, activeBtn);
+    }
+}
+
 function _onLoadContentCreators() {
     var cc = document.getElementById('codandotv_creators');
     if (!cc) return;
@@ -153,4 +195,6 @@ document.addEventListener('DOMContentLoaded', function () {
     onLibsContentRender(0, document.querySelector('.libs-tab.active'));
     _onLoadContentCreators();
     _onLoadSpeechContent();
+
+    fetchGitHubStars().then(_applyGitHubStars);
 });
