@@ -5,7 +5,9 @@ const libraryContentData_ptBR = [
         desc: 'Um framework para implementar Server-Driven UI de forma rápida e simples em Android, iOS, Flutter e KMP. Permite que as interfaces sejam controladas pelo servidor, tornando as atualizações mais ágeis e sem necessidade de publicar uma nova versão do app.',
         img: 'assets/images/libs/CraftD.mp4',
         video: true,
-        multirepo: []
+        multirepo: [
+            { name: 'CraftD', stars: '82', url: 'https://github.com/CodandoTV/CraftD' }
+        ]
     },
     {
         title: 'Popcorn Guineapig',
@@ -24,15 +26,19 @@ const libraryContentData_ptBR = [
         desc: 'Uma ferramenta CLI em Dart para enforçar regras de arquitetura em projetos Flutter/Dart. Mantém o código organizado e as dependências sob controle.',
         img: 'assets/images/libs/eagle-eye.png',
         video: false,
-        multirepo: []
+        multirepo: [
+            { name: 'eagle-eye', stars: '9', url: 'https://github.com/CodandoTV/eagle-eye' }
+        ]
     },
     {
         title: 'jujubaSVG',
-        support: ['Android', 'Flutter'],
-        desc: 'Uma biblioteca para manipular arquivos SVG em apps Android e Flutter, criada pela CodandoTV para facilitar o uso de SVGs dinâmicos no mobile.',
+        support: ['Android', 'Flutter', 'CMP'],
+        desc: 'Uma biblioteca para manipular arquivos SVG em apps Compose Multiplatform, Android e Flutter, criada pela CodandoTV para facilitar o uso de SVGs dinâmicos no mobile.',
         img: 'assets/images/libs/jujubaSVG.png',
         video: false,
-        multirepo: []
+        multirepo: [
+            { name: 'jujubaSVG', stars: '19', url: 'https://github.com/CodandoTV/jujubaSVG' }
+        ]
     },
     {
         title: 'Netflix',
@@ -54,7 +60,9 @@ const libraryContentData_enUs = [
         desc: 'A framework to implement Server-Driven UI quickly and easily on Android, iOS, Flutter, and KMP. It allows interfaces to be controlled by the server, making updates faster and without the need to publish a new version of the app.',
         img: 'assets/images/libs/CraftD.mp4',
         video: true,
-        multirepo: []
+        multirepo: [
+            { name: 'CraftD', stars: '82', url: 'https://github.com/CodandoTV/CraftD' }
+        ]
     },
     {
         title: 'Popcorn Guineapig',
@@ -73,15 +81,19 @@ const libraryContentData_enUs = [
         desc: 'A CLI tool in Dart to enforce architecture rules in Flutter/Dart projects. It keeps the code organized and dependencies under control.',
         img: 'assets/images/libs/eagle-eye.png',
         video: false,
-        multirepo: []
+        multirepo: [
+            { name: 'eagle-eye', stars: '9', url: 'https://github.com/CodandoTV/eagle-eye' }
+        ]
     },
     {
         title: 'jujubaSVG',
-        support: ['Android', 'Flutter'],
-        desc: 'A library to manipulate SVG files in Android and Flutter apps, created by CodandoTV to facilitate the use of dynamic SVGs in mobile.',
+        support: ['Android', 'Flutter', 'CMP'],
+        desc: 'A library to manipulate SVG files in Android, Flutter, and CMP apps, created by CodandoTV to facilitate the use of dynamic SVGs in mobile.',
         img: 'assets/images/libs/jujubaSVG.png',
         video: false,
-        multirepo: []
+        multirepo: [
+            { name: 'jujubaSVG', stars: '19', url: 'https://github.com/CodandoTV/jujubaSVG' }
+        ]
     },
     {
         title: 'Netflix',

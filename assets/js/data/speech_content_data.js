@@ -18,10 +18,10 @@ const speechContentData_ptBR = [
         youtubeCategories: ["Android", "Flutter", "iOS"]
     },
     {
-        youtubeTitle: "Kotzilla no Compose Multiplatform: Setup Completo",
+        youtubeTitle: "Como Configurar o MCP da Kotzilla na Prática | IA com Contexto Real no Kotlin",
         youtubeDescription: "Observabilidade gratuita para open source. Analise comportamento, performance e issues do seu app KMP.",
-        youtubeUrl: "https://www.youtube.com/embed/O9g7RX6OrRI",
-        youtubeCategories: ["CMP", "Observabilidade"]
+        youtubeUrl: "https://youtu.be/LyXl3EGrVWw?si=qCIxo-GotkLvktV7",
+        youtubeCategories: ["CMP", "Observabilidade", "IA"]
     },
     {
         youtubeTitle: "Mockito no Flutter: Testes Unitários com Mocks",
@@ -57,10 +57,10 @@ const speechContentData_enUs = [
         youtubeCategories: ["Android", "Flutter", "iOS"]
     },
     {
-        youtubeTitle: "Kotzilla on Compose Multiplatform: Complete Setup",
+        youtubeTitle: "How to Set Up Kotzilla's MCP in Practice | AI with Real Context in Kotlin",
         youtubeDescription: "Free observability for open source. Analyze behavior, performance and issues of your KMP app.",
-        youtubeUrl: "https://www.youtube.com/embed/O9g7RX6OrRI",
-        youtubeCategories: ["CMP", "Observability"]
+        youtubeUrl: "https://youtu.be/LyXl3EGrVWw?si=qCIxo-GotkLvktV7",
+        youtubeCategories: ["CMP", "Observability", "IA"]
     },
     {
         youtubeTitle: "Mockito in Flutter: Unit Testing with Mocks",
