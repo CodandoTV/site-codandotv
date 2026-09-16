@@ -20,7 +20,7 @@ const speechContentData_ptBR = [
     {
         youtubeTitle: "Como Configurar o MCP da Kotzilla na Prática | IA com Contexto Real no Kotlin",
         youtubeDescription: "Observabilidade gratuita para open source. Analise comportamento, performance e issues do seu app KMP.",
-        youtubeUrl: "https://youtu.be/LyXl3EGrVWw?si=qCIxo-GotkLvktV7",
+        youtubeUrl: "https://www.youtube.com/embed/LyXl3EGrVWw",
         youtubeCategories: ["CMP", "Observabilidade", "IA"]
     },
     {
@@ -59,7 +59,7 @@ const speechContentData_enUs = [
     {
         youtubeTitle: "How to Set Up Kotzilla's MCP in Practice | AI with Real Context in Kotlin",
         youtubeDescription: "Free observability for open source. Analyze behavior, performance and issues of your KMP app.",
-        youtubeUrl: "https://youtu.be/LyXl3EGrVWw?si=qCIxo-GotkLvktV7",
+        youtubeUrl: "https://www.youtube.com/embed/LyXl3EGrVWw",
         youtubeCategories: ["CMP", "Observability", "IA"]
     },
     {
