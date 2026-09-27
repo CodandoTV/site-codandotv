@@ -99,9 +99,9 @@ function onLibsContentRender(i, btn) {
             .map(
                 repo => `
                 <div style="flex:1;min-width:140px;background:#1a1f2a;border:1px solid rgba(56,182,255,.2);border-radius:10px;padding:14px;">
-                    <div style="font-size:1rem;font-weight:800;color:#F0F2F5;margin-bottom:4px;">
-                        ${repo.name}
-                    </div>
+                    <a href="${repo.url}" target="_blank" rel="noopener" style="font-size:1rem;font-weight:800;color:#F0F2F5;margin-bottom:4px;text-decoration:none;display:block;">
+                        ${repo.name} ↗
+                    </a>
                     <div style="font-size:.72rem;color:#8A909C;">
                         &#9733; ${repo.stars}
                     </div>
