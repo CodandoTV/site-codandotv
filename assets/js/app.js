@@ -48,7 +48,7 @@ function _onLoadContentCreators() {
 
     fetchContentCreatorsData().forEach(function (c, i) {
         var cardHtml = '<div class="creator-card fade-in" style="transition-delay: ' + ((i + 1) * 0.1) + 's;">' +
-            '<a href="' + c.linkedin + '" target="_blank" style="text-decoration:none;">' +
+            '<a href="' + c.link + '" target="_blank" style="text-decoration:none;">' +
             '<div class="creator-avatar-sm">' +
             '<img src="' + c.image + '" alt="' + c.name + '" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">' +
             '<div class="avatar-placeholder" style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">' +

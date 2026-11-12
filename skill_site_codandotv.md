@@ -43,7 +43,7 @@ A partir da refatoração v5 (Suporte a Internacionalização), todo conteúdo �
 - Renderização: `document.getElementById("home_welcome_title").textContent = data["home.welcome.title"]`
 
 ### Exemplo: Creators
-- Dados em `content_creators_data.js`: array com `{ name, role, image, linkedin }`
+- Dados em `content_creators_data.js`: array com `{ name, role, image, link }`
 - Renderização em `app.js`: mapeia array em HTML de cards + fallback de iniciais
 - ID do container: `id="creators_list"`
 
@@ -118,10 +118,10 @@ A partir da refatoração v5 (Suporte a Internacionalização), todo conteúdo �
 
 ## Creators
 
-| Sigla | Nome | Arquivo | Role | LinkedIn |
-|-------|------|---------|------|----------|
+| Sigla | Nome | Arquivo | Role | Link |
+|-------|------|---------|------|------|
 | JM | Junior Martins | `assets/images/junior.jpg` | Engenheiro Mobile | `https://www.linkedin.com/in/jrmartins/` |
-| GM | Gabriel Moro | `assets/images/moro.jpg` | Engenheiro Mobile | `https://www.linkedin.com/in/gabrielbronzattimoro15031994/` |
+| GM | Gabriel Moro | `assets/images/moro.jpg` | Engenheiro Mobile | `https://gabrielbmoro.dev/` |
 | PA | Pedro Alvarez | `assets/images/pedro.jpg` | Engenheiro Mobile | `https://www.linkedin.com/in/pedro-alvarez94/` |
 
 Todos têm `onerror` — se imagem não existir, mostra iniciais coloridas.
@@ -234,7 +234,7 @@ export async function fetchContentCreatorsData() {
       name: "Junior Martins",
       role: "Engenheiro Mobile",
       image: "assets/images/junior.jpg",
-      linkedin: "https://www.linkedin.com/in/jrmartins/"
+      link: "https://www.linkedin.com/in/jrmartins/"
     },
     { id: "gm", name: "Gabriel Moro", ... },
     { id: "pa", name: "Pedro Alvarez", ... }
@@ -369,7 +369,7 @@ ffmpeg -i input.gif -vf scale=800:-2 -vcodec libx264 -crf 28 -pix_fmt yuv420p ou
      name: "Nome Completo",
      role: "Título · Especialidade",
      image: "assets/images/nome.jpg",
-     linkedin: "https://linkedin.com/in/username"
+     link: "https://linkedin.com/in/username"
    }
    ```
 3. Se a imagem quebrar, o fallback renderiza as 2 primeiras iniciais com cor da paleta
