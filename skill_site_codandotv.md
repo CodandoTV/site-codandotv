@@ -109,7 +109,7 @@ A partir da refatoração v5 (Suporte a Internacionalização), todo conteúdo �
 1. **Nav** — fixo, logo + links de navegação (sem botão inscrever-se)
 2. **#home (Hero)** — badge, título Codando`<TV/>`, subtexto, botões (WhatsApp + GitHub com borda roxa, botão YT vermelho grande)
 3. **#canal (even-section)** — Conheça o Canal: 3 parágrafos + `<video>` com `assets/videos/conheca_canal.mp4`
-4. **#creators (odd-section)** — 3 creators em grid com avatares (120px) e fallback de iniciais
+4. **#creators (odd-section)** — 3 creators em grid com avatares (120px) e fallback de iniciais; ao final, bloco `#mentoria` com convite e CTA por e-mail
 5. **#comunidade (even-section)** — 4 stat cards + abas de libs + 6 vídeos úteis (speech cards)
 6. **#iniciativas (odd-section)** — 4 cards horizontais com mídia à direita (WhatsApp+Discord, Medium, Spotify, Curso KMP)
 7. **Footer** — Logo | ícones sociais SVG inline | botão "Fale conosco" | copyright
@@ -200,6 +200,7 @@ Cards com `min-height: 260px`, mídia com `width: 420px`, `position: relative` e
 | LinkedIn | `https://www.linkedin.com/in/rviannaoliveira/` |
 | Medium | `https://medium.com/codandotv/all` |
 | Email | `codando.tv@gmail.com` (via onclick, não href) |
+| Mentoria | `codando.tv@gmail.com` (CTA `#home_mentoria_cta`, via onclick) |
 
 ---
 
@@ -348,7 +349,7 @@ ffmpeg -i input.gif -vf scale=800:-2 -vcodec libx264 -crf 28 -pix_fmt yuv420p ou
 
 ## Responsivo (mobile ≤ 768px)
 
-- Nav links: `display: none`
+- Nav links: `display: none` até 820px (entre 821px e 900px, `gap: 20px` e `font-size: 0.8rem` para caber os 5 links)
 - Canal inner: `grid-template-columns: 1fr`
 - Libs content: `grid-template-columns: 1fr`
 - Speeches grid: `grid-template-columns: 1fr`
@@ -457,7 +458,7 @@ Fundo escuro com grid sutil de linhas roxas e glow roxo central. Vídeo mp4 com 
 Layout duas colunas: texto à esquerda (3 parágrafos + link vermelho YouTube) e vídeo à direita com borda roxa. Fundo `--surface`.
 
 **#creators (CodandoCreators)**
-Centralizado. 3 creators em grid com avatares (120px) com borda azul e fallback de iniciais coloridas se imagem não carregar.
+Centralizado. 3 creators em grid com avatares (120px) com borda azul e fallback de iniciais coloridas se imagem não carregar. Ao final da seção, o bloco `#mentoria` (largura máx. 880px) traz label, título com destaque azul, dois parágrafos e CTA por e-mail em botão roxo; borda e glow azul, `scroll-margin-top: 88px` para o link da nav não ficar sob a nav fixa.
 
 **#comunidade (Codando Comunidade)**
 4 stat cards em grid. Abaixo, abas horizontais (tabs) que trocam o conteúdo: info da lib à esquerda + imagem/vídeo à direita em grid 2 colunas. Abaixo das abas, grid de 6 cards de vídeo do YouTube com tags coloridas e descrição.
