@@ -48,7 +48,7 @@ function _onLoadContentCreators() {
 
     fetchContentCreatorsData().forEach(function (c, i) {
         var cardHtml = '<div class="creator-card fade-in" style="transition-delay: ' + ((i + 1) * 0.1) + 's;">' +
-            '<a href="' + c.linkedin + '" target="_blank" style="text-decoration:none;">' +
+            '<a href="' + c.link + '" target="_blank" style="text-decoration:none;">' +
             '<div class="creator-avatar-sm">' +
             '<img src="' + c.image + '" alt="' + c.name + '" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">' +
             '<div class="avatar-placeholder" style="display:none;font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--accent);">' +
@@ -122,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const generalData = fetchGeneralData();
     document.getElementById("home_topbar_home").textContent = generalData["home.topbar.home"];
     document.getElementById("home_topbar_codandocreators").textContent = generalData["home.topbar.codandocreators"];
+    document.getElementById("home_topbar_mentoria").textContent = generalData["home.topbar.mentoria"];
     document.getElementById("home_topbar_community").textContent = generalData["home.topbar.community"];
     document.getElementById("home_topbar_initiatives").textContent = generalData["home.topbar.initiatives"];
     document.getElementById("home_welcome_title").textContent = generalData["home.welcome.title"];
@@ -137,6 +138,13 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("home_codandocreators_title").textContent = generalData["home.codandocreators.title"];
     document.getElementById("home_codandocreators_description").textContent = generalData["home.codandocreators.description"];
     document.getElementById("home_codandocreators_rods_description").textContent = generalData["home.codandocreators.rods.description"];
+    document.getElementById("home_mentoria_label").textContent = generalData["home.mentoria.label"];
+    document.getElementById("home_mentoria_header_part1").textContent = generalData["home.mentoria.header_part1"];
+    document.getElementById("home_mentoria_header_part2").textContent = generalData["home.mentoria.header_part2"];
+    document.getElementById("home_mentoria_description").textContent = generalData["home.mentoria.description"];
+    document.getElementById("home_mentoria_invite").textContent = generalData["home.mentoria.invite"];
+    document.getElementById("home_mentoria_cta").textContent = generalData["home.mentoria.cta"];
+    document.getElementById("home_mentoria_email_hint").textContent = generalData["home.mentoria.email_hint"];
     document.getElementById("home_initiatives_title").textContent = generalData["home.initiatives.title"];
     document.getElementById("home_initiatives_header_part2").textContent = generalData["home.initiatives.header_part2"];
     document.getElementById("home_initiatives_description").textContent = generalData["home.initiatives.description"];
